@@ -1,22 +1,151 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+
+.ui.input.focus > input,
+.ui.input > input:focus {
+  border-color: #a4a4a4;
 }
 
-.App-logo {
-  height: 40vmin;
+.pl5 {
+  padding-left: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.pr5 {
+  padding-right: 5px;
+}
+.pb5 {
+  padding-bottom: 5px;
+}
+
+.fs20 {
+  font-size: 16px;
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.main-container {
+  margin: 0vw 1vw 2vw 1vw;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.navbar {
+  padding: 30px 70px 30px 100px;
+  background: #0079bf;
+  box-shadow: 0px 2px 4px #c2c2c2;
+  height: 45px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.nav-logo {
+  word-spacing: 80px;
+  text-align: left;
+}
+
+.nav-logo a {
+  text-decoration: none;
+  color: white;
+  font-family: "Rubik", sans-serif;
+}
+
+.nav-search {
+  flex-grow: 1;
+  padding-left: 50px;
+}
+
+.primary {
+  color: #0079bf;
+}
+
+.main-big-font {
+  font-size: 35px;
+  line-height: 60px;
+  font-family: "Raleway";
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.main-button-font {
+  font-family: "Rubik", sans-serif;
+  margin: 0px 5px;
+  color: rgb(208, 208, 208);
+  text-decoration: "none";
+  font-weight: bold;
+}
+
+.white {
   color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+.outer-container {
+  background: white;
+  margin: 0vh 0vh;
+  padding: 1vh;
+  border-radius: 0px;
+  min-height: 80vh;
+}
+
+.centre-font {
+  font-size: 50px;
+  color: #0079bf;
+}
+
+.login-button {
+  padding-right: 40px;
+}
+
+.footer-menu {
+  cursor: pointer;
+  margin-right: 20px;
+  color: rgb(116, 113, 113);
+  letter-spacing: 0px;
+  font-size: 14px;
+}
+
+@media (min-width: 600px) {
+  .main-container {
+    margin: 0vw 5vw 2vw 5vw;
+  }
+
+  .navbar {
+  }
+
+  .login-form {
+  }
+
+  .big-font {
+  }
+}
+
+@media (min-width: 900px) {
+  .outer-container {
+    background: white;
+    margin: 3vh 10vh;
+    padding: 1vh;
+    border-radius: 7px;
+    min-height: 80vh;
+  }
+  .main-container {
+    margin: 0vw 20vw 2vw 20vw;
+  }
+
+  .navbar {
+  }
+
+  .login-form {
+  }
+
+  .big-font {
+    font-size: 20px;
+  }
 }
