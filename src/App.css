@@ -38,7 +38,7 @@
 }
 
 .navbar {
-  padding: 30px 70px 30px 100px;
+  padding: 30px 20px 30px 20px;
   background: #0079bf;
   box-shadow: 0px 2px 4px #c2c2c2;
   height: 45px;
@@ -47,6 +47,10 @@
   align-items: center;
 }
 
+.mob-logo {
+  flex-grow: 0.5;
+  text-align: center;
+}
 .nav-logo {
   word-spacing: 80px;
   text-align: left;
@@ -118,6 +122,7 @@
   }
 
   .navbar {
+    padding: 30px 70px 30px 100px;
   }
 
   .login-form {
