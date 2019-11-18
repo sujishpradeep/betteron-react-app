@@ -46,7 +46,7 @@ class NavBar extends Component {
               <span className="mob-logo">
                 <Link to="/">
                   <div className="main-big-font inline white ">
-                    betterr&nbsp;
+                    upstacks&nbsp;
                     <i class="fas fa-chevron-circle-up"></i>
                   </div>
                 </Link>
@@ -61,7 +61,7 @@ class NavBar extends Component {
               <div className="nav-logo">
                 <Link to="/">
                   <div className="main-big-font inline">
-                    betterr
+                    upstacks
                     <i class="fas fa-chevron-circle-up"></i>
                   </div>
                 </Link>

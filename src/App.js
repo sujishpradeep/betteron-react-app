@@ -15,13 +15,13 @@ function App() {
         <Divider hidden></Divider>
         <Divider hidden></Divider>
         <Segment basic textAlign="center">
-          <div className="centre-font inline">
-            betterr&nbsp;
+          <div className=" main-big-font centre-font inline">
+            upstacks&nbsp;
             <i class="fas fa-chevron-circle-up "></i>
           </div>
         </Segment>
         <Header as="h1" textAlign="center">
-          Explore Apps, Courses and Books that help you get Better
+          Find the Best Personal Development Books, Apps & Courses
         </Header>
         <Divider hidden></Divider>
         <div class="main-container">
@@ -30,17 +30,20 @@ function App() {
               <Input
                 icon="search"
                 iconPosition="left"
-                placeholder="Search for a topic or a resource..."
+                placeholder="Search for a topic..."
                 fluid
                 focus
               />
             </Grid.Column>
           </Grid>
-          <Divider hidden></Divider>
-          <Icon name="chart line" color="grey" size="large"></Icon>
-          Popular Topics
-          <br></br>
-          <br></br>
+
+          <Grid columns={1} stackable>
+            <Grid.Column>
+              <Icon name="chart line" color="grey" size="large"></Icon>Popular
+              Topics
+            </Grid.Column>
+          </Grid>
+
           <Grid columns={3} stackable>
             <Grid.Column>
               <Segment className="pointer" raised>
