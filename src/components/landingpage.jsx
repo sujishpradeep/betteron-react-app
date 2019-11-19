@@ -56,7 +56,7 @@ class LandingPage extends Component {
           <Grid columns={3} stackable>
             <Grid.Column>
               <Segment
-                className="pointer "
+                className="pointer noSelect "
                 raised
                 as={Link}
                 style={{ display: "block", textDecoration: "none" }}
@@ -67,7 +67,7 @@ class LandingPage extends Component {
             </Grid.Column>
             <Grid.Column>
               <Segment
-                className="pointer"
+                className="pointer noSelect"
                 raised
                 as={Link}
                 style={{ display: "block", textDecoration: "none" }}
@@ -78,7 +78,7 @@ class LandingPage extends Component {
             </Grid.Column>
             <Grid.Column>
               <Segment
-                className="pointer"
+                className="pointer noSelect"
                 raised
                 as={Link}
                 style={{ display: "block", textDecoration: "none" }}
@@ -89,7 +89,7 @@ class LandingPage extends Component {
             </Grid.Column>
             <Grid.Column>
               <Segment
-                className="pointer"
+                className="pointer noSelect"
                 raised
                 as={Link}
                 style={{ display: "block", textDecoration: "none" }}
@@ -100,7 +100,7 @@ class LandingPage extends Component {
             </Grid.Column>
             <Grid.Column>
               <Segment
-                className="pointer"
+                className="pointer noSelect"
                 raised
                 as={Link}
                 style={{ display: "block", textDecoration: "none" }}

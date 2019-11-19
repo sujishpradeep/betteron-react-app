@@ -9,7 +9,6 @@ import {
   Container,
   Image
 } from "semantic-ui-react";
-import { CSSTransition } from "react-transition-group";
 
 class NavBar extends Component {
   state = {};
@@ -123,24 +122,17 @@ class NavBar extends Component {
         {isMobile && (
           <React.Fragment>
             {visible && (
-              <CSSTransition
-                in={visible}
-                appear={visible}
-                timeout={1000}
-                classNames={"trans"}
+              <div
+                className="navbar-mob"
+                style={{ background: bgcolor, textAlign: "center" }}
               >
-                <div
-                  className="navbar-mob"
-                  style={{ background: bgcolor, textAlign: "center" }}
-                >
-                  <div className="navbar-mob-item mbl white ">
-                    Submit a Resource
-                  </div>
-                  <div className="navbar-mob-item  mbr white ">
-                    <Icon name="user"></Icon>Login
-                  </div>
+                <div className="navbar-mob-item mbl white ">
+                  Submit a Resource
                 </div>
-              </CSSTransition>
+                <div className="navbar-mob-item  mbr white ">
+                  <Icon name="user"></Icon>Login
+                </div>
+              </div>
             )}
             {search && (
               <div
