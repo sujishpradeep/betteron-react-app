@@ -48,7 +48,7 @@ class TopicPage extends Component {
   render() {
     const { value, options, activeIndex, activeItem } = this.state;
     return (
-      <div className="outer-container ">
+      <div className="outer-container">
         <Container>
           <Segment basic>
             <Header as="h1">
@@ -121,112 +121,132 @@ class TopicPage extends Component {
               </Menu>
             </Grid.Column>
             <Grid.Column width={12}>
-              <Segment.Group>
-                <Segment>
-                  <Grid columns={2} container>
-                    <Grid.Column width={1}>
-                      <div
-                        secondary
-                        textAlign="center"
-                        className="pointer"
-                        style={{
-                          background: "#f3f4f5",
-                          border: "solid 1px rgba(34,36,38,.15)",
-                          padding: "2px",
-                          paddingBottom: "10px",
-                          textAlign: "center",
-                          borderRadius: "4px",
-                          width: "50px"
-                        }}
-                      >
-                        <Icon name="chevron up" color="grey"></Icon>
-                        <span
-                          as="h1"
-                          style={{
-                            fontSize: "23px",
-                            color: "grey",
-                            display: "block"
-                          }}
-                        >
-                          3
-                        </span>
-                      </div>
-                    </Grid.Column>
-                    <Grid.Column width={15}>
-                      <Container style={{ paddingLeft: "10px" }}>
-                        <Header as="h2">
-                          <span className="hover pointer"> Mint</span>
+              <div
+                style={{
+                  padding: "10px",
+                  border: "solid 1px rgba(34,36,38,.15)"
+                }}
+              >
+                <div style={{ display: "flex" }}>
+                  <div
+                    secondary
+                    textAlign="center"
+                    className="pointer"
+                    style={{
+                      background: "#f3f4f5",
+                      border: "solid 1px rgba(34,36,38,.15)",
+                      padding: "2px",
+                      paddingBottom: "10px",
+                      textAlign: "center",
+                      borderRadius: "4px",
+                      width: "50px",
+                      height: "60px"
+                    }}
+                  >
+                    <Icon name="chevron up" color="grey"></Icon>
+                    <span
+                      as="h1"
+                      style={{
+                        fontSize: "23px",
+                        color: "grey",
+                        display: "block"
+                      }}
+                    >
+                      3
+                    </span>
+                  </div>
+                  <div style={{ paddingLeft: "10px" }}>
+                    <Header as="h2" className="mb5">
+                      <span className="hover pointer ">
+                        Think And Grow Rich
+                      </span>
 
-                          <Header.Subheader> App | Free </Header.Subheader>
-                        </Header>
+                      <Header.Subheader> Napolean Hill </Header.Subheader>
+                    </Header>
 
-                        <Label color="yellow" className="pointer">
-                          <span className="black">Investing</span>
-                        </Label>
-                        <Label color="yellow" className="pointer">
-                          <span className="black">Personal Finance</span>
-                        </Label>
-                        <Label color="yellow" className="pointer">
-                          <span className="black">Money</span>
-                        </Label>
-                        <br></br>
-                      </Container>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
-                <Segment>
-                  <Grid columns={2} container>
-                    <Grid.Column width={1}>
-                      <div
-                        secondary
-                        textAlign="center"
-                        className="pointer"
-                        style={{
-                          background: "#f3f4f5",
-                          border: "solid 1px rgba(34,36,38,.15)",
-                          padding: "2px",
-                          textAlign: "center",
-                          borderRadius: "4px",
-                          width: "50px",
-                          paddingBottom: "10px"
-                        }}
-                      >
-                        <Icon name="chevron up" color="grey"></Icon>
-                        <span
-                          as="h1"
-                          style={{
-                            fontSize: "23px",
-                            color: "grey",
-                            display: "block"
-                          }}
-                        >
-                          34
-                        </span>
-                      </div>
-                    </Grid.Column>
-                    <Grid.Column width={15}>
-                      <Container style={{ paddingLeft: "10px" }}>
-                        <Header as="h2">
-                          <span className="hover pointer"> Mint</span>
+                    <Label color="yellow" className="pointer pr5 mt5">
+                      <span className="black">Book</span>
+                    </Label>
 
-                          <Header.Subheader> App | Free </Header.Subheader>
-                        </Header>
+                    <Label color="yellow" className="pointer pr5 mt5">
+                      <span className="black">Paid</span>
+                    </Label>
 
-                        <Label color="yellow" className="pointer">
-                          <span className="black">Investing</span>
-                        </Label>
-                        <Label color="yellow" className="pointer">
-                          <span className="black">Personal Finance</span>
-                        </Label>
-                        <Label color="yellow" className="pointer">
-                          <span className="black">Money</span>
-                        </Label>
-                        <br></br>
-                      </Container>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
-              </Segment.Group>
+                    <Label color="yellow" className="pointer pr5 mt5">
+                      <span className="black">Investing</span>
+                    </Label>
+                    <Label color="yellow" className="pointer pr5 mt5">
+                      <span className="black">Personal Finance</span>
+                    </Label>
+                    <Label color="yellow" className="pointer pr5 mt5">
+                      <span className="black">Money</span>
+                    </Label>
+                    <br></br>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  padding: "10px",
+                  border: "solid 1px rgba(34,36,38,.15)",
+                  borderTop: "0px"
+                }}
+              >
+                <div style={{ display: "flex" }}>
+                  <div
+                    secondary
+                    textAlign="center"
+                    className="pointer"
+                    style={{
+                      background: "#f3f4f5",
+                      border: "solid 1px rgba(34,36,38,.15)",
+                      padding: "2px",
+                      paddingBottom: "10px",
+                      textAlign: "center",
+                      borderRadius: "4px",
+                      width: "50px",
+                      height: "60px"
+                    }}
+                  >
+                    <Icon name="chevron up" color="grey"></Icon>
+                    <span
+                      as="h1"
+                      style={{
+                        fontSize: "23px",
+                        color: "grey",
+                        display: "block"
+                      }}
+                    >
+                      34
+                    </span>
+                  </div>
+                  <div style={{ paddingLeft: "10px" }}>
+                    <Header as="h2" className="mb5">
+                      <span className="hover pointer ">MoneyManager</span>
+                    </Header>
+
+                    <Label color="yellow" className="pointer pr5 mt5">
+                      <span className="black">App</span>
+                    </Label>
+
+                    <Label color="yellow" className="pointer pr5 mt5">
+                      <span className="black">Free</span>
+                    </Label>
+
+                    <Label color="yellow" className="pointer pr5 mt5">
+                      <span className="black">Investing</span>
+                    </Label>
+                    <Label color="yellow" className="pointer pr5 mt5">
+                      <span className="black">Personal Finance</span>
+                    </Label>
+                    <Label color="yellow" className="pointer pr5 mt5">
+                      <span className="black">Money</span>
+                    </Label>
+                    <br></br>
+                  </div>
+                </div>
+              </div>
             </Grid.Column>
           </Grid>
         </Container>
