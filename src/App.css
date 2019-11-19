@@ -3,6 +3,16 @@
   border-color: #a4a4a4;
 }
 
+.noSelect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .ui.vertical.menu {
   background: rgb(248, 248, 249);
 }

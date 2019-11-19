@@ -62,7 +62,7 @@ class NavBar extends Component {
                 inverted
                 icon="align justify"
               ></Button>
-              <span className="mob-logo">
+              <span className="mob-logo noSelect">
                 <Link to="/">
                   <div className="main-big-font inline white ">
                     upstacks&nbsp;
@@ -83,7 +83,7 @@ class NavBar extends Component {
           )}
           {!isMobile && (
             <React.Fragment>
-              <div className="nav-logo">
+              <div className="nav-logo noSelect">
                 <Link to="/">
                   <div className="main-big-font inline">
                     upstacks
