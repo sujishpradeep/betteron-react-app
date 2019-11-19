@@ -3,6 +3,15 @@
   border-color: #a4a4a4;
 }
 
+.ui.vertical.menu {
+  background: rgb(248, 248, 249);
+}
+
+.ui.yellow.label {
+  background-color: #e6eeff !important;
+  border-color: #fbbd08 !important;
+}
+
 .tdn {
   text-decoration: none;
 }
@@ -99,6 +108,9 @@ a {
   color: #0079bf;
 }
 
+.hover:hover {
+  color: #0079bf;
+}
 .main-big-font {
   font-size: 35px;
   line-height: 60px;
