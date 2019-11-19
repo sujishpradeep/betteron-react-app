@@ -123,23 +123,41 @@ class TopicPage extends Component {
             <Grid.Column width={12}>
               <Segment.Group>
                 <Segment>
-                  <Grid columns={2}>
-                    <Grid.Column width={3}>
-                      <Segment secondary textAlign="center" className="pointer">
-                        <Icon name="chevron up" color="grey" size="big"></Icon>
-                        <div style={{ fontSize: "23px", color: "grey" }}>
-                          35
-                        </div>
-                      </Segment>
+                  <Grid columns={2} container>
+                    <Grid.Column width={1}>
+                      <div
+                        secondary
+                        textAlign="center"
+                        className="pointer"
+                        style={{
+                          background: "#f3f4f5",
+                          border: "solid 1px rgba(34,36,38,.15)",
+                          padding: "2px",
+                          paddingBottom: "10px",
+                          textAlign: "center",
+                          borderRadius: "4px",
+                          width: "50px"
+                        }}
+                      >
+                        <Icon name="chevron up" color="grey"></Icon>
+                        <span
+                          as="h1"
+                          style={{
+                            fontSize: "23px",
+                            color: "grey",
+                            display: "block"
+                          }}
+                        >
+                          3
+                        </span>
+                      </div>
                     </Grid.Column>
-                    <Grid.Column width={13}>
-                      <Container basic>
+                    <Grid.Column width={15}>
+                      <Container style={{ paddingLeft: "10px" }}>
                         <Header as="h2">
-                          <span className="hover pointer">
-                            Think And Grow Rich
-                          </span>
+                          <span className="hover pointer"> Mint</span>
 
-                          <Header.Subheader> Book | Paid </Header.Subheader>
+                          <Header.Subheader> App | Free </Header.Subheader>
                         </Header>
 
                         <Label color="yellow" className="pointer">
@@ -157,17 +175,37 @@ class TopicPage extends Component {
                   </Grid>
                 </Segment>
                 <Segment>
-                  <Grid columns={2}>
-                    <Grid.Column width={2}>
-                      <Segment secondary textAlign="center" className="pointer">
-                        <Icon name="chevron up" color="grey" size="big"></Icon>
-                        <span style={{ fontSize: "23px", color: "grey" }}>
-                          3
+                  <Grid columns={2} container>
+                    <Grid.Column width={1}>
+                      <div
+                        secondary
+                        textAlign="center"
+                        className="pointer"
+                        style={{
+                          background: "#f3f4f5",
+                          border: "solid 1px rgba(34,36,38,.15)",
+                          padding: "2px",
+                          textAlign: "center",
+                          borderRadius: "4px",
+                          width: "50px",
+                          paddingBottom: "10px"
+                        }}
+                      >
+                        <Icon name="chevron up" color="grey"></Icon>
+                        <span
+                          as="h1"
+                          style={{
+                            fontSize: "23px",
+                            color: "grey",
+                            display: "block"
+                          }}
+                        >
+                          34
                         </span>
-                      </Segment>
+                      </div>
                     </Grid.Column>
-                    <Grid.Column width={14}>
-                      <Container basic>
+                    <Grid.Column width={15}>
+                      <Container style={{ paddingLeft: "10px" }}>
                         <Header as="h2">
                           <span className="hover pointer"> Mint</span>
 
