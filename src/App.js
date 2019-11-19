@@ -1,86 +1,25 @@
 import React from "react";
 import "./App.css";
-import { Segment, Header, Input, Grid, Divider, Icon } from "semantic-ui-react";
+
 import NavBar from "./components/navbar";
+import LandingPage from "./components/landingpage";
+import Footer from "./components/footer";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // import logo from "./logo.png";
+import TopicPage from "./components/topicpage";
 
 function App() {
   return (
     <React.Fragment>
-      <NavBar></NavBar>
-
-      <div className="outer-container">
-        <Divider hidden></Divider>
-        <Divider hidden></Divider>
-        <Divider hidden></Divider>
-        <Segment basic textAlign="center">
-          <div className=" main-big-font centre-font inline">
-            upstacks
-            {/* <i className="fas fa-chevron-circle-up "></i> */}
-            <Icon name="chevron circle up"></Icon>
-          </div>
-        </Segment>
-        <Header as="h1" textAlign="center">
-          Find the Best Personal Development Apps, Books & Courses
-        </Header>
-        <Divider hidden></Divider>
-        <div className="main-container">
-          <Grid>
-            <Grid.Column>
-              <Input
-                icon="search"
-                iconPosition="left"
-                placeholder="Search for a topic..."
-                fluid
-                focus
-              />
-            </Grid.Column>
-          </Grid>
-
-          <Grid columns={1} stackable>
-            <Grid.Column>
-              <Icon name="chart line" color="grey" size="large"></Icon>Popular
-              Topics
-            </Grid.Column>
-          </Grid>
-
-          <Grid columns={3} stackable>
-            <Grid.Column>
-              <Segment className="pointer" raised>
-                <div className="inline fs20">Productivity </div>
-              </Segment>
-            </Grid.Column>
-            <Grid.Column>
-              <Segment className="pointer" raised>
-                <div className="inline fs20">Personal Finance</div>
-              </Segment>
-            </Grid.Column>
-            <Grid.Column>
-              <Segment className="pointer" raised>
-                <div className="inline fs20">Fitness</div>
-              </Segment>
-            </Grid.Column>
-            <Grid.Column>
-              <Segment className="pointer" raised>
-                <div className="inline fs20">Time Management</div>
-              </Segment>
-            </Grid.Column>
-            <Grid.Column>
-              <Segment className="pointer" raised>
-                <div className="inline fs20">Procastination</div>
-              </Segment>
-            </Grid.Column>
-          </Grid>
-        </div>
-      </div>
-
-      <Segment basic textAlign="center">
-        <span className="footer-menu">Home</span>
-        <span className="footer-menu">About us</span>
-        <span className="footer-menu">Feedback</span>
-        <span className="footer-menu">Contact us</span>
-      </Segment>
+      <Router>
+        <NavBar></NavBar>
+        <Switch>
+          <Route path="/topics/:topicname" component={TopicPage}></Route>
+          <Route path="/" component={LandingPage}></Route>
+        </Switch>
+        <Footer></Footer>
+      </Router>
     </React.Fragment>
   );
 }

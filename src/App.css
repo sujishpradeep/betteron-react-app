@@ -3,6 +3,10 @@
   border-color: #a4a4a4;
 }
 
+.tdn {
+  text-decoration: none;
+}
+
 .pl5 {
   padding-left: 5px;
 }
@@ -45,7 +49,7 @@
 }
 
 .navbar-mob {
-  height: 45px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   padding-top: 2px;
@@ -78,6 +82,14 @@
   font-family: "Rubik", sans-serif;
 }
 
+a {
+  color: #383838;
+  text-decoration: none;
+}
+
+.black {
+  color: rgba(0, 0, 0, 0.87);
+}
 .nav-search {
   flex-grow: 1;
   padding-left: 50px;

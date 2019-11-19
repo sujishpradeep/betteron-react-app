@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Input, Icon, Button, Divider } from "semantic-ui-react";
+
 class NavBar extends Component {
   state = {};
 
