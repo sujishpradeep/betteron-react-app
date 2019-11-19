@@ -16,15 +16,16 @@ function App() {
         <Divider hidden></Divider>
         <Segment basic textAlign="center">
           <div className=" main-big-font centre-font inline">
-            upstacks&nbsp;
-            <i class="fas fa-chevron-circle-up "></i>
+            upstacks
+            {/* <i className="fas fa-chevron-circle-up "></i> */}
+            <Icon name="chevron circle up"></Icon>
           </div>
         </Segment>
         <Header as="h1" textAlign="center">
-          Find the Best Personal Development Books, Apps & Courses
+          Find the Best Personal Development Apps, Books & Courses
         </Header>
         <Divider hidden></Divider>
-        <div class="main-container">
+        <div className="main-container">
           <Grid>
             <Grid.Column>
               <Input

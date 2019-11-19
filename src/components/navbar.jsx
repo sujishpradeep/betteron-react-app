@@ -20,7 +20,7 @@ class NavBar extends Component {
   }
 
   updateWindowDimensions() {
-    const isMobile = window.innerWidth >= 920 ? false : true;
+    const isMobile = window.innerWidth >= 1000 ? false : true;
 
     this.setState({
       width: window.innerWidth,
@@ -28,9 +28,27 @@ class NavBar extends Component {
       isMobile: isMobile
     });
   }
+
+  handleButtonClick = () => {
+    if (this.state.isMobile) {
+      const visible = !this.state.visible;
+      const search = false;
+      this.setState({ visible, search });
+    }
+  };
+
+  handleSearchClick = () => {
+    if (this.state.isMobile) {
+      const search = !this.state.search;
+      const visible = false;
+      this.setState({ search, visible });
+    }
+  };
+
   render() {
-    console.log("isMobile", this.state.isMobile);
-    const isMobile = this.state.isMobile;
+    const { isMobile, visible, search } = this.state;
+    const bgcolor = visible || search ? "#0079bf" : "white";
+
     return (
       <React.Fragment>
         <div className="navbar">
@@ -47,12 +65,18 @@ class NavBar extends Component {
                 <Link to="/">
                   <div className="main-big-font inline white ">
                     upstacks&nbsp;
-                    <i class="fas fa-chevron-circle-up"></i>
+                    {/* <i className="fas fa-chevron-circle-up"></i> */}
+                    <Icon name="chevron circle up"></Icon>
                   </div>
                 </Link>
               </span>
               <span>
-                <Icon name="search" className="white" size="large"></Icon>
+                <Icon
+                  name="search"
+                  className="white"
+                  size="large"
+                  onClick={this.handleSearchClick}
+                ></Icon>
               </span>
             </React.Fragment>
           )}
@@ -62,7 +86,8 @@ class NavBar extends Component {
                 <Link to="/">
                   <div className="main-big-font inline">
                     upstacks
-                    <i class="fas fa-chevron-circle-up"></i>
+                    <Icon name="chevron circle up"></Icon>
+                    {/* <i className="fas fa-chevron-circle-up"></i> */}
                   </div>
                 </Link>
               </div>
@@ -71,7 +96,7 @@ class NavBar extends Component {
               </div>
               <div className="nav-buttons">
                 <span className=" pointer main-button-font white login-button">
-                  <Icon name="plus circle"></Icon>Submit a resource
+                  <Icon name="plus circle"></Icon>Submit a Resource
                 </span>
 
                 <span className=" pointer main-button-font white login-button">
@@ -81,6 +106,36 @@ class NavBar extends Component {
             </React.Fragment>
           )}
         </div>
+        {isMobile && (
+          <div
+            className="navbar-mob"
+            style={{ background: bgcolor, textAlign: "center" }}
+          >
+            {visible && (
+              <React.Fragment>
+                <div className="navbar-mob-item mbl white ">
+                  Submit a Resource
+                </div>
+                <div className="navbar-mob-item  mbr white ">
+                  <Icon name="user"></Icon>Login
+                </div>
+              </React.Fragment>
+            )}
+            {search && (
+              <React.Fragment>
+                <div style={{ width: "100%", padding: "0px 20px" }}>
+                  <Input
+                    icon="search"
+                    iconPosition="left"
+                    placeholder="Search for a topic..."
+                    focus
+                    fluid
+                  />
+                </div>
+              </React.Fragment>
+            )}
+          </div>
+        )}
       </React.Fragment>
     );
   }
