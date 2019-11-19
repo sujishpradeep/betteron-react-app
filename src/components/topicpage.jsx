@@ -164,21 +164,21 @@ class TopicPage extends Component {
                       <Header.Subheader> Napolean Hill </Header.Subheader>
                     </Header>
 
-                    <Label color="yellow" className="pointer pr5 mt5">
+                    <Label color="yellow" className="pointer noSelect pr5 mt5">
                       <span className="black">Book</span>
                     </Label>
 
-                    <Label color="yellow" className="pointer pr5 mt5">
+                    <Label color="yellow" className="pointer noSelect pr5 mt5">
                       <span className="black">Paid</span>
                     </Label>
 
-                    <Label color="yellow" className="pointer pr5 mt5">
+                    <Label color="yellow" className="pointer  noSelect pr5 mt5">
                       <span className="black">Investing</span>
                     </Label>
-                    <Label color="yellow" className="pointer pr5 mt5">
+                    <Label color="yellow" className="pointer noSelect pr5 mt5">
                       <span className="black">Personal Finance</span>
                     </Label>
-                    <Label color="yellow" className="pointer pr5 mt5">
+                    <Label color="yellow" className="pointer noSelect pr5 mt5">
                       <span className="black">Money</span>
                     </Label>
                     <br></br>

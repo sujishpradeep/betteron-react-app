@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Input, Icon, Button, Divider } from "semantic-ui-react";
+import {
+  Input,
+  Icon,
+  Button,
+  Divider,
+  Transition,
+  Container,
+  Image
+} from "semantic-ui-react";
+import { CSSTransition } from "react-transition-group";
 
 class NavBar extends Component {
   state = {};
@@ -62,7 +71,10 @@ class NavBar extends Component {
                 inverted
                 icon="align justify"
               ></Button>
-              <span className="mob-logo noSelect">
+              <span
+                className="mob-logo noSelect"
+                onClick={() => this.setState({ visible: false, search: false })}
+              >
                 <Link to="/">
                   <div className="main-big-font inline white ">
                     upstacks&nbsp;
@@ -107,23 +119,34 @@ class NavBar extends Component {
             </React.Fragment>
           )}
         </div>
+
         {isMobile && (
-          <div
-            className="navbar-mob"
-            style={{ background: bgcolor, textAlign: "center" }}
-          >
+          <React.Fragment>
             {visible && (
-              <React.Fragment>
-                <div className="navbar-mob-item mbl white ">
-                  Submit a Resource
+              <CSSTransition
+                in={visible}
+                appear={visible}
+                timeout={1000}
+                classNames={"trans"}
+              >
+                <div
+                  className="navbar-mob"
+                  style={{ background: bgcolor, textAlign: "center" }}
+                >
+                  <div className="navbar-mob-item mbl white ">
+                    Submit a Resource
+                  </div>
+                  <div className="navbar-mob-item  mbr white ">
+                    <Icon name="user"></Icon>Login
+                  </div>
                 </div>
-                <div className="navbar-mob-item  mbr white ">
-                  <Icon name="user"></Icon>Login
-                </div>
-              </React.Fragment>
+              </CSSTransition>
             )}
             {search && (
-              <React.Fragment>
+              <div
+                className="navbar-mob"
+                style={{ background: bgcolor, textAlign: "center" }}
+              >
                 <div style={{ width: "100%", padding: "0px 20px" }}>
                   <Input
                     icon="search"
@@ -133,9 +156,9 @@ class NavBar extends Component {
                     fluid
                   />
                 </div>
-              </React.Fragment>
+              </div>
             )}
-          </div>
+          </React.Fragment>
         )}
       </React.Fragment>
     );
