@@ -3,6 +3,9 @@
   border-color: #a4a4a4;
 }
 
+.ui.search .prompt {
+  border-radius: 7px !important;
+}
 .noSelect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;

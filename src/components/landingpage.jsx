@@ -2,8 +2,21 @@ import React, { Component } from "react";
 
 import { createBrowserHistory } from "history";
 
-import { Segment, Header, Input, Grid, Divider, Icon } from "semantic-ui-react";
+import {
+  Segment,
+  Header,
+  Input,
+  Grid,
+  Divider,
+  Icon,
+  Search,
+  Menu,
+  Form
+} from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import PopularTag from "./populartag";
+import _ from "lodash";
+import { withRouter } from "react-router";
 
 class LandingPage extends Component {
   state = {};
@@ -16,14 +29,51 @@ class LandingPage extends Component {
 
   handleTopicClick = () => {};
 
+  handleResultSelect = (e, result) => {
+    console.log("result", result.result.short);
+    this.props.history.push(`/topics/${result.result.short}`);
+  };
+
+  handleSearchChange = (e, { value }) => {
+    console.log("Search change");
+    const initialState = { isLoading: false, results: [], value: "" };
+    this.setState({ isLoading: true, value });
+
+    var keys = { name: "title" };
+
+    var tags = this.props.tags.map(function(o) {
+      return _.mapKeys(o, function(v, k) {
+        return k in keys ? keys[k] : k;
+      });
+    });
+
+    setTimeout(() => {
+      if (this.state.value.length < 1) return this.setState(initialState);
+
+      const re = new RegExp(_.escapeRegExp(this.state.value), "i");
+      const isMatch = result => re.test(result.title);
+
+      this.setState({
+        isLoading: false,
+        results: _.filter(tags, isMatch)
+      });
+    }, 300);
+
+    console.log("this.props.tags", tags);
+  };
+
   render() {
+    const { isLoading, value, results } = this.state;
+    const tags = this.props.tags || [];
+    const popularTags = tags.filter(tag => tag.popular === "Y");
+
     return (
       <div className="outer-container">
         <Divider hidden></Divider>
         <Divider hidden></Divider>
         <Divider hidden></Divider>
         <Segment basic textAlign="center">
-          <div className=" main-big-font centre-font inline">
+          <div className=" main-big-font centre-font inline pointer noSelect">
             upstacks
             {/* <i className="fas fa-chevron-circle-up "></i> */}
             <Icon name="chevron circle up"></Icon>
@@ -34,14 +84,23 @@ class LandingPage extends Component {
         </Header>
         <Divider hidden></Divider>
         <div className="main-container">
-          <Grid>
+          <Grid columns={1} stackable>
             <Grid.Column>
-              <Input
+              <Search
+                input={{ fluid: true, focus: true }}
+                fluid
                 icon="search"
                 iconPosition="left"
                 placeholder="Search for a topic..."
-                fluid
-                focus
+                noResultsMessage="Sorry, no results found"
+                loading={isLoading}
+                onResultSelect={this.handleResultSelect}
+                onSearchChange={_.debounce(this.handleSearchChange, 500, {
+                  leading: true
+                })}
+                results={results}
+                value={value}
+                {...this.props}
               />
             </Grid.Column>
           </Grid>
@@ -54,61 +113,9 @@ class LandingPage extends Component {
           </Grid>
 
           <Grid columns={3} stackable>
-            <Grid.Column>
-              <Segment
-                className="pointer noSelect "
-                raised
-                as={Link}
-                style={{ display: "block", textDecoration: "none" }}
-                to="/topics/productivity"
-              >
-                <div className="inline fs20 black">Productivity</div>
-              </Segment>
-            </Grid.Column>
-            <Grid.Column>
-              <Segment
-                className="pointer noSelect"
-                raised
-                as={Link}
-                style={{ display: "block", textDecoration: "none" }}
-                to="/topics/personal-finance"
-              >
-                <div className="inline fs20 black">Personal Finance</div>
-              </Segment>
-            </Grid.Column>
-            <Grid.Column>
-              <Segment
-                className="pointer noSelect"
-                raised
-                as={Link}
-                style={{ display: "block", textDecoration: "none" }}
-                to="/topics/fitness"
-              >
-                <div className="inline fs20 black">Fitness</div>
-              </Segment>
-            </Grid.Column>
-            <Grid.Column>
-              <Segment
-                className="pointer noSelect"
-                raised
-                as={Link}
-                style={{ display: "block", textDecoration: "none" }}
-                to="/topics/time-management"
-              >
-                <div className="inline fs20 black">Time Management</div>
-              </Segment>
-            </Grid.Column>
-            <Grid.Column>
-              <Segment
-                className="pointer noSelect"
-                raised
-                as={Link}
-                style={{ display: "block", textDecoration: "none" }}
-                to="/topics/procastination"
-              >
-                <div className="inline fs20 black">Procastination</div>
-              </Segment>
-            </Grid.Column>
+            {popularTags.map(tag => (
+              <PopularTag key={tag._id} tag={tag} />
+            ))}
           </Grid>
         </div>
       </div>

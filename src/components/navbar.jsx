@@ -7,7 +7,8 @@ import {
   Divider,
   Transition,
   Container,
-  Image
+  Image,
+  Search
 } from "semantic-ui-react";
 
 class NavBar extends Component {
@@ -104,7 +105,7 @@ class NavBar extends Component {
                 </Link>
               </div>
               <div className="nav-search">
-                <Input icon="search" placeholder="Search a topic.." />
+                <Search icon="search" placeholder="Search a topic.." />
               </div>
               <div className="nav-buttons">
                 <span className=" pointer main-button-font white login-button">
@@ -140,12 +141,13 @@ class NavBar extends Component {
                 style={{ background: bgcolor, textAlign: "center" }}
               >
                 <div style={{ width: "100%", padding: "0px 20px" }}>
-                  <Input
+                  <Search
                     icon="search"
                     iconPosition="left"
                     placeholder="Search for a topic..."
                     focus
                     fluid
+                    input={{ fluid: true }}
                   />
                 </div>
               </div>
