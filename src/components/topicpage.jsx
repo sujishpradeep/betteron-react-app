@@ -63,7 +63,7 @@ class TopicPage extends Component {
         <Container>
           <Grid columns={1}>
             <Grid.Column>
-              <Header as="h1">
+              <Header as="h1" style={{ paddingTop: "10px" }}>
                 <Header.Content>
                   Personal Finance
                   <Header.Subheader>
