@@ -27,6 +27,7 @@ class TopicPage extends Component {
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
+    window.scrollTo(0, 0);
   }
 
   componentWillUnmount() {

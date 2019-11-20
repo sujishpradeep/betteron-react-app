@@ -62,6 +62,9 @@ class LandingPage extends Component {
     console.log("this.props.tags", tags);
   };
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     const { isLoading, value, results } = this.state;
     const tags = this.props.tags || [];
