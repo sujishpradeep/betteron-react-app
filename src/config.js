@@ -1,5 +1,5 @@
 const dev = {
-  API_URL: "http://3.106.113.188:3005"
+  API_URL: "https://myunspent.com"
 };
 
 const prod = {
