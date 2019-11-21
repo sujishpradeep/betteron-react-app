@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {
-  Input,
-  Icon,
-  Button,
-  Divider,
-  Transition,
-  Container,
-  Image,
-  Search
-} from "semantic-ui-react";
+import { Icon, Button, Search } from "semantic-ui-react";
+import _ from "lodash";
+
+import { withRouter } from "react-router-dom";
+import createHistory from "history/createBrowserHistory";
 
 class NavBar extends Component {
   state = {};
@@ -55,8 +50,41 @@ class NavBar extends Component {
     }
   };
 
+  handleResultSelect = (e, result) => {
+    console.log("result", result.result.short);
+    this.props.history.push(`/topics/${result.result.short}`);
+  };
+
+  handleSearchChange = (e, { value }) => {
+    console.log("Search change");
+    const initialState = { isLoading: false, results: [], value: "" };
+    this.setState({ isLoading: true, value });
+
+    var keys = { name: "title" };
+
+    var tags = this.props.tags.map(function(o) {
+      return _.mapKeys(o, function(v, k) {
+        return k in keys ? keys[k] : k;
+      });
+    });
+
+    setTimeout(() => {
+      if (this.state.value.length < 1) return this.setState(initialState);
+
+      const re = new RegExp(_.escapeRegExp(this.state.value), "i");
+      const isMatch = result => re.test(result.title);
+
+      this.setState({
+        isLoading: false,
+        results: _.filter(tags, isMatch)
+      });
+    }, 300);
+
+    console.log("this.props.tags", tags);
+  };
+
   render() {
-    const { isMobile, visible, search } = this.state;
+    const { isMobile, visible, search, isLoading, value, results } = this.state;
     const bgcolor = visible || search ? "#0079bf" : "white";
 
     return (
@@ -105,7 +133,21 @@ class NavBar extends Component {
                 </Link>
               </div>
               <div className="nav-search">
-                <Search icon="search" placeholder="Search a topic.." />
+                <Search
+                  input={{ focus: true }}
+                  icon="search"
+                  iconPosition="left"
+                  placeholder="Search for a topic..."
+                  noResultsMessage="Sorry, no results found"
+                  loading={isLoading}
+                  onResultSelect={this.handleResultSelect}
+                  onSearchChange={_.debounce(this.handleSearchChange, 500, {
+                    leading: true
+                  })}
+                  results={results}
+                  value={value}
+                  {...this.props}
+                />
               </div>
               <div className="nav-buttons">
                 <span className=" pointer main-button-font white login-button">
@@ -142,12 +184,20 @@ class NavBar extends Component {
               >
                 <div style={{ width: "100%", padding: "0px 20px" }}>
                   <Search
+                    input={{ fluid: true, focus: true }}
+                    fluid
                     icon="search"
                     iconPosition="left"
                     placeholder="Search for a topic..."
-                    focus
-                    fluid
-                    input={{ fluid: true }}
+                    noResultsMessage="Sorry, no results found"
+                    loading={isLoading}
+                    onResultSelect={this.handleResultSelect}
+                    onSearchChange={_.debounce(this.handleSearchChange, 500, {
+                      leading: true
+                    })}
+                    results={results}
+                    value={value}
+                    {...this.props}
                   />
                 </div>
               </div>

@@ -25,9 +25,11 @@ class App extends Component {
     return (
       <React.Fragment>
         <Router>
-          <NavBar></NavBar>
           <Switch>
-            <Route path="/topics/:topicname" component={TopicPage}></Route>
+            <Route
+              path="/topics/:topicname"
+              render={props => <TopicPage {...props} tags={tags} />}
+            />
             <Route
               path="/"
               render={props => <LandingPage {...props} tags={tags} />}

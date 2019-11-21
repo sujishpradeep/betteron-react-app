@@ -1,47 +1,32 @@
 import React, { Component } from "react";
 
-import { createBrowserHistory } from "history";
-
 import {
   Segment,
   Header,
-  Input,
   Grid,
   Divider,
   Icon,
-  Search,
-  Menu,
-  Form
+  Search
 } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 import PopularTag from "./populartag";
 import _ from "lodash";
-import { withRouter } from "react-router";
+import NavBar from "./navbar";
+import Fuse from "fuse.js";
 
 class LandingPage extends Component {
   state = {};
 
-  //   redirect(to) {
-  //     createBrowserHistory.push({
-  //       pathname: to
-  //     });
-  //   }
-
-  handleTopicClick = () => {};
-
   handleResultSelect = (e, result) => {
-    console.log("result", result.result.short);
     this.props.history.push(`/topics/${result.result.short}`);
   };
 
   handleSearchChange = (e, { value }) => {
-    console.log("Search change");
     const initialState = { isLoading: false, results: [], value: "" };
     this.setState({ isLoading: true, value });
 
-    var keys = { name: "title" };
+    let keys = { name: "title" };
 
-    var tags = this.props.tags.map(function(o) {
+    let tags = this.props.tags.map(function(o) {
       return _.mapKeys(o, function(v, k) {
         return k in keys ? keys[k] : k;
       });
@@ -51,11 +36,24 @@ class LandingPage extends Component {
       if (this.state.value.length < 1) return this.setState(initialState);
 
       const re = new RegExp(_.escapeRegExp(this.state.value), "i");
-      const isMatch = result => re.test(result.title);
+      let isMatch = result => re.test(result.title);
+
+      let options2 = {
+        shouldSort: true,
+        threshold: 0.4,
+        location: 0,
+        distance: 100,
+        maxPatternLength: 32,
+        minMatchCharLength: 1,
+        keys: ["title"]
+      };
+      let fuse = new Fuse(tags, options2); // "list" is the item array
+
+      isMatch = fuse.search(value);
 
       this.setState({
         isLoading: false,
-        results: _.filter(tags, isMatch)
+        results: isMatch
       });
     }, 300);
 
@@ -71,57 +69,60 @@ class LandingPage extends Component {
     const popularTags = tags.filter(tag => tag.popular === "Y");
 
     return (
-      <div className="outer-container">
-        <Divider hidden></Divider>
-        <Divider hidden></Divider>
-        <Divider hidden></Divider>
-        <Segment basic textAlign="center">
-          <div className=" main-big-font centre-font inline pointer noSelect">
-            upstacks
-            {/* <i className="fas fa-chevron-circle-up "></i> */}
-            <Icon name="chevron circle up"></Icon>
+      <React.Fragment>
+        <NavBar tags={this.props.tags} history={this.props.history}></NavBar>
+        <div className="outer-container">
+          <Divider hidden></Divider>
+          <Divider hidden></Divider>
+          <Divider hidden></Divider>
+          <Segment basic textAlign="center">
+            <div className=" main-big-font centre-font inline pointer noSelect">
+              upstacks
+              {/* <i className="fas fa-chevron-circle-up "></i> */}
+              <Icon name="chevron circle up"></Icon>
+            </div>
+          </Segment>
+          <Header as="h1" textAlign="center">
+            Find the Best Personal Development Apps, Books & Courses
+          </Header>
+          <Divider hidden></Divider>
+          <div className="main-container">
+            <Grid columns={1} stackable>
+              <Grid.Column>
+                <Search
+                  input={{ fluid: true, focus: true }}
+                  fluid
+                  icon="search"
+                  iconPosition="left"
+                  placeholder="Search for a topic..."
+                  noResultsMessage="Sorry, no results found"
+                  loading={isLoading}
+                  onResultSelect={this.handleResultSelect}
+                  onSearchChange={_.debounce(this.handleSearchChange, 500, {
+                    leading: true
+                  })}
+                  results={results}
+                  value={value}
+                  {...this.props}
+                />
+              </Grid.Column>
+            </Grid>
+
+            <Grid columns={1} stackable>
+              <Grid.Column>
+                <Icon name="chart line" color="grey" size="large"></Icon>Popular
+                Topics
+              </Grid.Column>
+            </Grid>
+
+            <Grid columns={3} stackable>
+              {popularTags.map(tag => (
+                <PopularTag key={tag._id} tag={tag} />
+              ))}
+            </Grid>
           </div>
-        </Segment>
-        <Header as="h1" textAlign="center">
-          Find the Best Personal Development Apps, Books & Courses
-        </Header>
-        <Divider hidden></Divider>
-        <div className="main-container">
-          <Grid columns={1} stackable>
-            <Grid.Column>
-              <Search
-                input={{ fluid: true, focus: true }}
-                fluid
-                icon="search"
-                iconPosition="left"
-                placeholder="Search for a topic..."
-                noResultsMessage="Sorry, no results found"
-                loading={isLoading}
-                onResultSelect={this.handleResultSelect}
-                onSearchChange={_.debounce(this.handleSearchChange, 500, {
-                  leading: true
-                })}
-                results={results}
-                value={value}
-                {...this.props}
-              />
-            </Grid.Column>
-          </Grid>
-
-          <Grid columns={1} stackable>
-            <Grid.Column>
-              <Icon name="chart line" color="grey" size="large"></Icon>Popular
-              Topics
-            </Grid.Column>
-          </Grid>
-
-          <Grid columns={3} stackable>
-            {popularTags.map(tag => (
-              <PopularTag key={tag._id} tag={tag} />
-            ))}
-          </Grid>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
