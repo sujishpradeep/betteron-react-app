@@ -77,14 +77,20 @@ class LandingPage extends Component {
           <Divider hidden></Divider>
           <Segment basic textAlign="center">
             <div className=" main-big-font centre-font inline pointer noSelect">
-              upstacks
+              betteron
               {/* <i className="fas fa-chevron-circle-up "></i> */}
               <Icon name="chevron circle up"></Icon>
+            </div>
+            <div
+              style={{ color: "#999", fontSize: "15px", textAlign: "center" }}
+            >
+              Croudsourced. Straightforward. User-friendly
             </div>
           </Segment>
           <Header as="h1" textAlign="center">
             Find the Best Personal Development Apps, Books & Courses
           </Header>
+
           <Divider hidden></Divider>
           <div className="main-container">
             <Grid columns={1} stackable>

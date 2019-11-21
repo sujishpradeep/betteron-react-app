@@ -105,7 +105,7 @@ class NavBar extends Component {
               >
                 <Link to="/">
                   <div className="main-big-font inline white ">
-                    upstacks&nbsp;
+                    betteron&nbsp;
                     {/* <i className="fas fa-chevron-circle-up"></i> */}
                     <Icon name="chevron circle up"></Icon>
                   </div>
@@ -126,7 +126,7 @@ class NavBar extends Component {
               <div className="nav-logo noSelect">
                 <Link to="/">
                   <div className="main-big-font inline">
-                    upstacks
+                    betteron
                     <Icon name="chevron circle up"></Icon>
                     {/* <i className="fas fa-chevron-circle-up"></i> */}
                   </div>

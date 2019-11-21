@@ -72,8 +72,8 @@ class TopicPage extends Component {
                   <Header.Content>
                     Personal Finance
                     <Header.Subheader>
-                      Find Apps, Books and Courses submitted and voted by the
-                      our Community to help you with Personal Finance
+                      Find Apps, Books and Courses submitted and voted by
+                      betteron Community to help you with Personal Finance
                     </Header.Subheader>
                   </Header.Content>
                 </Header>
