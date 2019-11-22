@@ -1,19 +1,15 @@
 import React, { Component } from "react";
 import NavBar from "./navbar";
+import { getResourcesByTag } from "../services/resourceservice";
+import ResourceItem from "./resourceitem";
 import {
   Header,
-  Form,
   Container,
-  Item,
   Checkbox,
   Grid,
   Menu,
-  Message,
-  Segment,
-  Label,
   Icon,
-  Button,
-  Divider
+  Button
 } from "semantic-ui-react";
 
 class TopicPage extends Component {
@@ -25,10 +21,29 @@ class TopicPage extends Component {
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    this.setResources(this.props.match.params.topicname);
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
     window.scrollTo(0, 0);
+  }
+
+  async setResources(topicname) {
+    const { data } = await getResourcesByTag(topicname);
+
+    topicname = topicname
+      .replace(/\b\w/g, l => l.toUpperCase())
+      .replace("-", " ");
+
+    this.setState({ resources: data, topicname });
+  }
+
+  async componentDidUpdate(prevProps) {
+    if (
+      this.props.match.params.topicname !== prevProps.match.params.topicname
+    ) {
+      this.setResources(this.props.match.params.topicname);
+    }
   }
 
   componentWillUnmount() {
@@ -57,8 +72,27 @@ class TopicPage extends Component {
     const filterVisible = !this.state.filterVisible;
     this.setState({ filterVisible });
   };
+
+  handleLabelClick = topic => {
+    // console.log("this.props", this.props.history);
+    this.setState({ topicname: topic });
+  };
+
+  doSortAndFilter = resources => {
+    return resources;
+  };
+
   render() {
-    const { value, isMobile, activeItem, filterVisible } = this.state;
+    const {
+      value,
+      isMobile,
+      activeItem,
+      filterVisible,
+      resources,
+      topicname
+    } = this.state;
+
+    const resourcesFiltered = this.doSortAndFilter(resources) || [];
     const iconColor = filterVisible ? "blue" : "grey";
 
     return (
@@ -70,10 +104,10 @@ class TopicPage extends Component {
               <Grid.Column>
                 <Header as="h1" style={{ paddingTop: "10px" }}>
                   <Header.Content>
-                    Personal Finance
+                    {topicname}
                     <Header.Subheader>
-                      Find Apps, Books and Courses submitted and voted by
-                      betteron Community to help you with Personal Finance
+                      {`Find Apps, Books and Courses submitted and voted by
+                      betteron Community on the topic of ${topicname}`}
                     </Header.Subheader>
                   </Header.Content>
                 </Header>
@@ -109,7 +143,7 @@ class TopicPage extends Component {
               {(!isMobile || filterVisible) && (
                 <Grid.Column width={4}>
                   <Menu vertical>
-                    <div style={{ background: "rgb(248, 248, 249);" }}>
+                    <div style={{ background: "rgb(248, 248, 249)" }}>
                       <Menu.Item
                         name="promotions"
                         active={activeItem === "promotions"}
@@ -178,165 +212,13 @@ class TopicPage extends Component {
                   Top Personal Finance Applications And Resources
                 </div>
 
-                <div
-                  style={{
-                    padding: "10px",
-                    border: "solid 1px rgba(34,36,38,.15)",
-                    borderTop: "0px"
-                  }}
-                >
-                  <div style={{ display: "flex" }}>
-                    <div
-                      secondary
-                      textAlign="center"
-                      className="pointer noSelect"
-                      style={{
-                        background: "#f3f4f5",
-                        border: "solid 1px rgba(34,36,38,.15)",
-                        padding: "2px",
-                        paddingBottom: "10px",
-                        textAlign: "center",
-                        borderRadius: "4px",
-                        width: "50px",
-                        height: "60px"
-                      }}
-                    >
-                      <Icon name="chevron up" color="grey"></Icon>
-                      <span
-                        as="h1"
-                        style={{
-                          fontSize: "23px",
-                          color: "grey",
-                          display: "block"
-                        }}
-                      >
-                        3
-                      </span>
-                    </div>
-                    <div style={{ paddingLeft: "10px" }}>
-                      <Header as="h2" className="mb5">
-                        <span className="hover pointer noSelect ">
-                          Think And Grow Rich
-                        </span>
-
-                        <Header.Subheader> Napolean Hill </Header.Subheader>
-                      </Header>
-
-                      <Label
-                        color="yellow"
-                        className="pointer noSelect pr5 mt5"
-                      >
-                        <span className="black">Book</span>
-                      </Label>
-
-                      <Label
-                        color="yellow"
-                        className="pointer noSelect pr5 mt5"
-                      >
-                        <span className="black">Paid</span>
-                      </Label>
-
-                      <Label
-                        color="yellow"
-                        className="pointer  noSelect pr5 mt5"
-                      >
-                        <span className="black">Investing</span>
-                      </Label>
-                      <Label
-                        color="yellow"
-                        className="pointer noSelect pr5 mt5"
-                      >
-                        <span className="black">Personal Finance</span>
-                      </Label>
-                      <Label
-                        color="yellow"
-                        className="pointer noSelect pr5 mt5"
-                      >
-                        <span className="black">Money</span>
-                      </Label>
-                      <br></br>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    padding: "10px",
-                    border: "solid 1px rgba(34,36,38,.15)",
-                    borderTop: "0px"
-                  }}
-                >
-                  <div style={{ display: "flex" }}>
-                    <div
-                      secondary
-                      textAlign="center"
-                      className="pointer noSelect"
-                      style={{
-                        background: "#f3f4f5",
-                        border: "solid 1px rgba(34,36,38,.15)",
-                        padding: "2px",
-                        paddingBottom: "10px",
-                        textAlign: "center",
-                        borderRadius: "4px",
-                        width: "50px",
-                        height: "60px"
-                      }}
-                    >
-                      <Icon name="chevron up" color="grey"></Icon>
-                      <span
-                        as="h1"
-                        style={{
-                          fontSize: "23px",
-                          color: "grey",
-                          display: "block"
-                        }}
-                      >
-                        34
-                      </span>
-                    </div>
-                    <div style={{ paddingLeft: "10px" }}>
-                      <Header as="h2" className="mb5">
-                        <span className="hover pointer noSelect">
-                          MoneyManager
-                        </span>
-                      </Header>
-
-                      <Label
-                        color="yellow"
-                        className="pointer noSelect pr5 mt5"
-                      >
-                        <span className="black">App</span>
-                      </Label>
-
-                      <Label
-                        color="yellow"
-                        className="pointer noSelect pr5 mt5"
-                      >
-                        <span className="black">Free</span>
-                      </Label>
-
-                      <Label
-                        color="yellow"
-                        className="pointer noSelect pr5 mt5"
-                      >
-                        <span className="black">Investing</span>
-                      </Label>
-                      <Label
-                        color="yellow"
-                        className="pointer noSelect pr5 mt5"
-                      >
-                        <span className="black">Personal Finance</span>
-                      </Label>
-                      <Label
-                        color="yellow"
-                        className="pointer noSelect pr5 mt5"
-                      >
-                        <span className="black">Money</span>
-                      </Label>
-                      <br></br>
-                    </div>
-                  </div>
-                </div>
+                {resourcesFiltered.map(r => (
+                  <ResourceItem
+                    key={r._id}
+                    resource={r}
+                    history={this.props.history}
+                  />
+                ))}
               </Grid.Column>
             </Grid>
           </Container>

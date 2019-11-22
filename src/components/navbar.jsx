@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { Icon, Button, Search } from "semantic-ui-react";
 import _ from "lodash";
 
-import { withRouter } from "react-router-dom";
-import createHistory from "history/createBrowserHistory";
+// import { withRouter } from "react-router-dom";
+// import createHistory from "history/createBrowserHistory";
 
 class NavBar extends Component {
   state = {};
@@ -51,12 +51,10 @@ class NavBar extends Component {
   };
 
   handleResultSelect = (e, result) => {
-    console.log("result", result.result.short);
     this.props.history.push(`/topics/${result.result.short}`);
   };
 
   handleSearchChange = (e, { value }) => {
-    console.log("Search change");
     const initialState = { isLoading: false, results: [], value: "" };
     this.setState({ isLoading: true, value });
 
@@ -79,8 +77,6 @@ class NavBar extends Component {
         results: _.filter(tags, isMatch)
       });
     }, 300);
-
-    console.log("this.props.tags", tags);
   };
 
   render() {
@@ -136,7 +132,6 @@ class NavBar extends Component {
                 <Search
                   input={{ focus: true }}
                   icon="search"
-                  iconPosition="left"
                   placeholder="Search for a topic..."
                   noResultsMessage="Sorry, no results found"
                   loading={isLoading}
@@ -187,7 +182,6 @@ class NavBar extends Component {
                     input={{ fluid: true, focus: true }}
                     fluid
                     icon="search"
-                    iconPosition="left"
                     placeholder="Search for a topic..."
                     noResultsMessage="Sorry, no results found"
                     loading={isLoading}

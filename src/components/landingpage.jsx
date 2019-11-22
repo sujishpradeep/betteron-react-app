@@ -56,8 +56,6 @@ class LandingPage extends Component {
         results: isMatch
       });
     }, 300);
-
-    console.log("this.props.tags", tags);
   };
 
   componentDidMount() {
@@ -99,7 +97,6 @@ class LandingPage extends Component {
                   input={{ fluid: true, focus: true }}
                   fluid
                   icon="search"
-                  iconPosition="left"
                   placeholder="Search for a topic..."
                   noResultsMessage="Sorry, no results found"
                   loading={isLoading}
@@ -109,7 +106,6 @@ class LandingPage extends Component {
                   })}
                   results={results}
                   value={value}
-                  {...this.props}
                 />
               </Grid.Column>
             </Grid>

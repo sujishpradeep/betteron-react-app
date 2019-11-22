@@ -1,9 +1,9 @@
 const dev = {
-  API_URL: "https://myunspent.com"
+  API_URL: "https://www.myunspent.com"
 };
 
 const prod = {
-  API_URL: "llll"
+  API_URL: "http://localhost:3000"
 };
-const config = process.env.NODE_ENV === "prod" ? prod : dev;
+const config = process.env.REACT_APP_NODE_ENV === "prod" ? prod : dev;
 export default config;
