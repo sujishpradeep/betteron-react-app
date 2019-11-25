@@ -147,6 +147,7 @@ class NavBar extends Component {
             <SubmitResource
               onSubmitModalClick={this.handleSubmitModalClick}
               tags={this.props.tags}
+              onClose={() => this.setState({ submitModal: false })}
             ></SubmitResource>
           </Modal>
           {isMobile && (

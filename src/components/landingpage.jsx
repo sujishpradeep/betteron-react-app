@@ -82,11 +82,11 @@ class LandingPage extends Component {
             <div
               style={{ color: "#999", fontSize: "15px", textAlign: "center" }}
             >
-              Croudsourced. Straightforward. User-friendly
+              Find the Resources which lets you scale up high
             </div>
           </Segment>
           <Header as="h1" textAlign="center">
-            Find the Best Personal Development Apps, Books & Courses
+            Explore the Best Personal Development Apps, Books & Courses
           </Header>
 
           <Divider hidden></Divider>

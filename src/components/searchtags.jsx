@@ -54,7 +54,7 @@ class SearchTag extends Component {
           }}
           fluid
           icon="pink"
-          placeholder="Select a relevant tag name for the resource"
+          placeholder="Select relevant topic areas in which the resource fits in"
           noResultsMessage="Sorry, no results found"
           loading={isSearchLoading}
           onResultSelect={this.handleResultSelect}

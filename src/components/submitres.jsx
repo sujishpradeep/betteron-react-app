@@ -36,11 +36,13 @@ class SubmitResource extends Component {
     tags: [],
     errors: {},
     values: [],
-    isSearchLoadings: []
+    isSearchLoadings: [],
+    isLoading: false,
+    successMessage: false
   };
 
   componentDidMount = () => {
-    this.setState({ totalTags: 1 });
+    this.setState({ successMessage: false });
   };
 
   handleSubmit = async () => {
@@ -61,8 +63,27 @@ class SubmitResource extends Component {
       console.log("this.state", this.state);
       const { addresource } = this.state;
       addresource.tags = this.state.tags.toString();
+
       await addResources(addresource);
-      window.location = "/";
+
+      this.setState({ isLoading: true });
+
+      setTimeout(() => {
+        this.setState({ successMessage: true });
+        const addresource = {
+          name: "",
+          url: "default",
+          type: "Book",
+          pricing: "Free",
+          appstore: "default",
+          ioslink: "default",
+          gplaylink: "default",
+          upvotes: "0",
+          isApproved: "N",
+          tags: "  "
+        };
+        this.setState({ isLoading: false, addresource, tags: [] });
+      }, 1000);
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
@@ -179,21 +200,16 @@ class SubmitResource extends Component {
   };
 
   render() {
-    let { totalTags } = this.state;
+    const { successMessage, addresource } = this.state;
 
-    if (totalTags > 10) totalTags = 10;
-
-    console.log("totalTags", totalTags);
     const { errors } = this.state || {};
     const { tags } = this.state || [];
-    console.log("tags", tags);
-    console.log("tags", this.state.addresource.tags);
 
     const filteredTags = this.props.tags.filter(
       t => !this.state.tags.includes(t.name)
     );
 
-    console.log("filteredTags", filteredTags);
+    console.log("this.state.isLoading", this.state.isLoading);
 
     const disabled = !_.isEmpty(errors);
 
@@ -217,6 +233,17 @@ class SubmitResource extends Component {
           </div>
         </Modal.Header>
         <Modal.Content>
+          {successMessage && (
+            <React.Fragment>
+              <Message success>
+                Thanks for submitting the resource. Our moderators would
+                evaluate your submission and have it published within 24 hours.
+              </Message>
+              <Header as="h4" textAlign="center">
+                Make a New Submission
+              </Header>
+            </React.Fragment>
+          )}
           <div style={{ textAlign: "left" }}>
             <form className="login">
               <Form>
@@ -226,6 +253,7 @@ class SubmitResource extends Component {
                     placeholder="Resoure Title"
                     name="name"
                     onChange={this.handleChange}
+                    value={addresource.name}
 
                     // icon="window maximize outline"
                     // iconPosition="left"
@@ -238,33 +266,32 @@ class SubmitResource extends Component {
                 </Form.Field>
 
                 <Form.Field>
-                  <label> Tags</label>
+                  <label> Topics</label>
 
-                  <Container basic>
-                    <div style={{ marginBottom: "5px" }}>
-                      {tags &&
-                        tags.map((t, i) => (
-                          <Label color="blue">
-                            {t}
-                            <Icon
-                              name="delete"
-                              onClick={() => this.removeTag(t)}
-                            />
-                          </Label>
-                        ))}
-                    </div>
+                  <div style={{ marginBottom: "5px" }}>
+                    {tags &&
+                      tags.map((t, i) => (
+                        <Label color="blue">
+                          {t}
+                          <Icon
+                            name="delete"
+                            onClick={() => this.removeTag(t)}
+                          />
+                        </Label>
+                      ))}
+                  </div>
 
-                    <SearchTag
-                      tags={filteredTags}
-                      onNewTagAdd={this.handleNewTagAdd}
-                    ></SearchTag>
-                    {errors["tags"] && (
-                      <Label color="orange" basic pointing="above">
-                        Enter atleast 1 tag
-                      </Label>
-                    )}
+                  <SearchTag
+                    tags={filteredTags}
+                    onNewTagAdd={this.handleNewTagAdd}
+                  ></SearchTag>
+                  {errors["tags"] && (
+                    <Label color="orange" basic pointing="above">
+                      No topics are selected
+                    </Label>
+                  )}
 
-                    {/* <div style={{ textAlign: "center" }}>
+                  {/* <div style={{ textAlign: "center" }}>
                       <Button
                         color="grey"
                         basic
@@ -275,7 +302,6 @@ class SubmitResource extends Component {
                         icon="plus"
                       ></Button>
                     </div> */}
-                  </Container>
                 </Form.Field>
 
                 {/* {errors["tags"] && (
@@ -295,6 +321,7 @@ class SubmitResource extends Component {
                   <Form.Input
                     placeholder=" URL of the Resource (Optional)"
                     name="url"
+                    value={addresource.url === "default" ? "" : addresource.url}
                     onChange={this.handleChange}
                     // icon="external alternate"
                     // iconPosition="left"
@@ -370,6 +397,7 @@ class SubmitResource extends Component {
                     this.handleSubmit();
                   }}
                   fluid
+                  loading={this.state.isLoading}
                 >
                   Submit
                 </Button>
