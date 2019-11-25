@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Icon, Button, Search } from "semantic-ui-react";
+import { Icon, Button, Search, Modal } from "semantic-ui-react";
 import _ from "lodash";
+import Signup from "./signup";
+import authservice from "../services/authservice";
+import Login from "./login";
 
 // import { withRouter } from "react-router-dom";
 // import createHistory from "history/createBrowserHistory";
 
 class NavBar extends Component {
-  state = {};
+  state = { isPageLoading: true, loginModal: false, signupModal: false };
 
   constructor(props) {
     super(props);
@@ -18,6 +21,10 @@ class NavBar extends Component {
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
+    const token = authservice.getCurrentUser() || {};
+
+    console.log("token", token);
+    this.setState({ token, isPageLoading: false });
   }
 
   componentWillUnmount() {
@@ -33,6 +40,11 @@ class NavBar extends Component {
       isMobile: isMobile
     });
   }
+
+  logOut = () => {
+    authservice.logout();
+    window.location = "/";
+  };
 
   handleButtonClick = () => {
     if (this.state.isMobile) {
@@ -55,8 +67,8 @@ class NavBar extends Component {
   };
 
   handleSearchChange = (e, { value }) => {
-    const initialState = { isLoading: false, results: [], value: "" };
-    this.setState({ isLoading: true, value });
+    const initialState = { isSearchLoading: false, results: [], value: "" };
+    this.setState({ isSearchLoading: true, value });
 
     var keys = { name: "title" };
 
@@ -73,14 +85,43 @@ class NavBar extends Component {
       const isMatch = result => re.test(result.title);
 
       this.setState({
-        isLoading: false,
+        isSearchLoading: false,
         results: _.filter(tags, isMatch)
       });
     }, 300);
   };
 
+  handleLoginModalClick = () => {
+    const loginModal = !this.state.loginModal;
+    const signupModal = false;
+    this.setState({ loginModal, signupModal });
+  };
+
+  handleSignUpClick = () => {
+    const signupModal = !this.state.signupModal;
+    const loginModal = false;
+    this.setState({ signupModal, loginModal });
+  };
+
   render() {
-    const { isMobile, visible, search, isLoading, value, results } = this.state;
+    const {
+      isMobile,
+      visible,
+      search,
+      isSearchLoading,
+      value,
+      results,
+      isPageLoading,
+      token,
+      loginModal,
+      signupModal
+    } = this.state;
+
+    const fullname = (token && token.fullname) || "";
+    console.log("loginModal", loginModal);
+    if (isPageLoading)
+      return <div style={{ height: "100%", width: "100%" }}></div>;
+
     const bgcolor = visible || search ? "#0079bf" : "white";
 
     return (
@@ -134,7 +175,7 @@ class NavBar extends Component {
                   icon="search"
                   placeholder="Search for a topic..."
                   noResultsMessage="Sorry, no results found"
-                  loading={isLoading}
+                  loading={isSearchLoading}
                   onResultSelect={this.handleResultSelect}
                   onSearchChange={_.debounce(this.handleSearchChange, 500, {
                     leading: true
@@ -149,9 +190,40 @@ class NavBar extends Component {
                   <Icon name="plus circle"></Icon>Submit a Resource
                 </span>
 
-                <span className=" pointer main-button-font white login-button">
-                  Login
-                </span>
+                {!fullname && (
+                  <span
+                    className=" pointer main-button-font white login-button"
+                    onClick={() => this.setState({ signupModal: true })}
+                  >
+                    Login
+                  </span>
+                )}
+                <Modal
+                  size="tiny"
+                  open={signupModal}
+                  onClose={() => this.setState({ signupModal: false })}
+                >
+                  <Signup
+                    onLoginModalClick={this.handleLoginModalClick}
+                  ></Signup>
+                </Modal>
+
+                <Modal
+                  size="tiny"
+                  open={loginModal}
+                  onClose={() => this.setState({ loginModal: false })}
+                >
+                  <Login onSignUpClick={this.handleSignUpClick}></Login>
+                </Modal>
+
+                {fullname && (
+                  <span
+                    className=" pointer main-button-font white login-button"
+                    onClick={this.logOut}
+                  >
+                    Logout
+                  </span>
+                )}
               </div>
             </React.Fragment>
           )}
@@ -167,9 +239,42 @@ class NavBar extends Component {
                 <div className="navbar-mob-item mbl white ">
                   Submit a Resource
                 </div>
-                <div className="navbar-mob-item  mbr white ">
-                  <Icon name="user"></Icon>Login
-                </div>
+
+                {!fullname && (
+                  <span
+                    className=" navbar-mob-item  mbr white "
+                    onClick={() => this.setState({ signupModal: true })}
+                  >
+                    <Icon name="user"></Icon>Login
+                  </span>
+                )}
+
+                <Modal
+                  size="tiny"
+                  open={signupModal}
+                  onClose={() => this.setState({ signupModal: false })}
+                >
+                  <Signup
+                    onLoginModalClick={this.handleLoginModalClick}
+                  ></Signup>
+                </Modal>
+
+                <Modal
+                  size="tiny"
+                  open={loginModal}
+                  onClose={() => this.setState({ loginModal: false })}
+                >
+                  <Login onSignUpClick={this.handleSignUpClick}></Login>
+                </Modal>
+
+                {fullname && (
+                  <span
+                    className=" navbar-mob-item  mbr white "
+                    onClick={this.logOut}
+                  >
+                    Logout
+                  </span>
+                )}
               </div>
             )}
             {search && (
@@ -184,7 +289,7 @@ class NavBar extends Component {
                     icon="search"
                     placeholder="Search for a topic..."
                     noResultsMessage="Sorry, no results found"
-                    loading={isLoading}
+                    loading={isSearchLoading}
                     onResultSelect={this.handleResultSelect}
                     onSearchChange={_.debounce(this.handleSearchChange, 500, {
                       leading: true

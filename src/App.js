@@ -10,24 +10,29 @@ import { getTags } from "./services/tagService";
 import TopicPage from "./components/topicpage";
 import AdminTags from "./admin/admintags";
 import AdminResources from "./admin/adminresources";
+import authservice from "./services/authservice";
 
 class App extends Component {
   state = {};
 
   async componentDidMount() {
     const { data } = await getTags();
-    this.setState({ tags: data });
+    const token = authservice.getCurrentUser();
+
+    this.setState({ tags: data, token });
   }
 
   render() {
-    const { tags } = this.state;
+    const { tags, token } = this.state;
     return (
       <React.Fragment>
         <Router>
           <Switch>
             <Route
               path="/topics/:topicname"
-              render={props => <TopicPage {...props} tags={tags} />}
+              render={props => (
+                <TopicPage {...props} tags={tags} token={token} />
+              )}
             />
 
             <Route
@@ -40,7 +45,10 @@ class App extends Component {
             />
             <Route
               path="/"
-              render={props => <LandingPage {...props} tags={tags} />}
+              exact
+              render={props => (
+                <LandingPage {...props} tags={tags} token={token} />
+              )}
             />
           </Switch>
           <Footer></Footer>

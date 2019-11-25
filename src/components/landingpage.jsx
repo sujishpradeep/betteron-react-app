@@ -68,7 +68,7 @@ class LandingPage extends Component {
 
     return (
       <React.Fragment>
-        <NavBar tags={this.props.tags} history={this.props.history}></NavBar>
+        <NavBar {...this.props}></NavBar>
         <div className="outer-container">
           <Divider hidden></Divider>
           <Divider hidden></Divider>

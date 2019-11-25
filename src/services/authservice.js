@@ -1,55 +1,58 @@
-// import http from "./httpservice";
-// import { apiUrl } from "../config";
-// const jwtDecode = require("jwt-decode");
+import http from "./httpservice";
+import { apiUrl } from "../config";
 
-// http.setJwt(getJwt(), getGoogleToken());
+import config from "../config";
 
-// const apiUsers = apiUrl + "/api/users";
+const jwtDecode = require("jwt-decode");
 
-// export function getUser(id) {
-//   return http.get(apiUsers + "/" + id);
-// }
+http.setJwt(getJwt(), getGoogleToken());
 
-// export async function login(user) {
-//   const { data: jwt } = await http.post(apiUsers + "/auth/", user);
-//   localStorage.setItem("token", jwt);
-// }
+const apiUsers = config.API_URL + "/upstacks/users";
 
-// export async function logingoogle(user) {
-//   const response = await http.post(apiUsers + "/authgoogle/", user);
-//   localStorage.setItem("token", response.headers["x-auth-token"]);
-// }
+export function getUser(id) {
+  return http.get(apiUsers + "/" + id);
+}
 
-// export function logout() {
-//   localStorage.removeItem("token");
-//   localStorage.removeItem("gtoken");
-// }
+export async function login(user) {
+  const { data: jwt } = await http.post(apiUsers + "/auth/", user);
+  localStorage.setItem("token", jwt);
+}
 
-// export function getCurrentUser() {
-//   try {
-//     const jwt = localStorage.getItem("token");
-//     return jwtDecode(jwt);
-//   } catch (ex) {
-//     return null;
-//   }
-// }
+export async function logingoogle(user) {
+  const response = await http.post(apiUsers + "/authgoogle/", user);
+  localStorage.setItem("token", response.headers["x-auth-token"]);
+}
 
-// export async function signUp(user) {
-//   const response = await http.post(apiUsers, user);
-//   localStorage.setItem("token", response.headers["x-auth-token"]);
-// }
+export function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("gtoken");
+}
 
-// export function getJwt() {
-//   return localStorage.getItem("token");
-// }
+export function getCurrentUser() {
+  try {
+    const jwt = localStorage.getItem("token");
+    return jwtDecode(jwt);
+  } catch (ex) {
+    return null;
+  }
+}
 
-// export function getGoogleToken() {
-//   return localStorage.getItem("gtoken");
-// }
+export async function signUp(user) {
+  const response = await http.post(apiUsers, user);
+  localStorage.setItem("token", response.headers["x-auth-token"]);
+}
 
-// export default {
-//   login,
-//   logout,
-//   getCurrentUser,
-//   getJwt
-// };
+export function getJwt() {
+  return localStorage.getItem("token");
+}
+
+export function getGoogleToken() {
+  return localStorage.getItem("gtoken");
+}
+
+export default {
+  login,
+  logout,
+  getCurrentUser,
+  getJwt
+};
