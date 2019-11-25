@@ -55,10 +55,10 @@ class ResourceItem extends Component {
                 {resource.name}
               </span>
 
-              <span color="grey" className="pointer noSelect pr5 mt5 fs12 ">
+              <span color="grey" className="pointer noSelect pr5 fs12 ">
                 <span className="black">{resource.type} /</span>
               </span>
-              <span color="grey" className="pointer noSelect pr5 mt5 fs12">
+              <span color="grey" className="pointer noSelect pr5 fs12">
                 <span className="black">{resource.pricing}</span>
               </span>
 
