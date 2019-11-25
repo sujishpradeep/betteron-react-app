@@ -73,8 +73,13 @@ class SubmitResource extends Component {
   };
 
   handleNewTagAdd = tag => {
-    console.log("tags", this.state.tags);
-    this.setState({ tags: [...this.state.tags, tag] });
+    this.setState({
+      tags: [...this.state.tags, tag],
+      errors: {
+        ...this.state.errors,
+        tags: ""
+      }
+    });
   };
 
   validateResource = () => {
@@ -98,7 +103,13 @@ class SubmitResource extends Component {
     if (this.state.addresource.hasOwnProperty(name)) {
       let { addresource } = this.state;
       addresource[name] = value;
-      this.setState({ addresource, errors: {} });
+      this.setState({
+        addresource,
+        errors: {
+          ...this.state.errors,
+          name: ""
+        }
+      });
     }
   };
 
@@ -110,11 +121,12 @@ class SubmitResource extends Component {
           message: `Title is empty`
         };
       }),
+
     tags: Joi.string()
       .optional()
       .error(err => {
         return {
-          message: "Select a category from the list"
+          message: "Enter atleast one tag"
         };
       }),
 
@@ -214,20 +226,25 @@ class SubmitResource extends Component {
                     placeholder="Resoure Title"
                     name="name"
                     onChange={this.handleChange}
-                    error={errors["name"] || false}
+
                     // icon="window maximize outline"
                     // iconPosition="left"
                   />
+                  {errors["name"] && (
+                    <Label color="orange" basic pointing="above">
+                      Resource Name is blank
+                    </Label>
+                  )}
                 </Form.Field>
 
                 <Form.Field>
                   <label> Tags</label>
 
                   <Container basic>
-                    <div>
+                    <div style={{ marginBottom: "5px" }}>
                       {tags &&
                         tags.map((t, i) => (
-                          <Label>
+                          <Label color="blue">
                             {t}
                             <Icon
                               name="delete"
@@ -241,6 +258,11 @@ class SubmitResource extends Component {
                       tags={filteredTags}
                       onNewTagAdd={this.handleNewTagAdd}
                     ></SearchTag>
+                    {errors["tags"] && (
+                      <Label color="orange" basic pointing="above">
+                        Enter atleast 1 tag
+                      </Label>
+                    )}
 
                     {/* <div style={{ textAlign: "center" }}>
                       <Button
