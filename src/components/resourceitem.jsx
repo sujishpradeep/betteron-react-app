@@ -56,10 +56,10 @@ class ResourceItem extends Component {
               </span>
 
               <span color="grey" className="pointer noSelect pr5 fs12 ">
-                <span className="black">{resource.type} /</span>
+                <span className="black">{resource.type}/</span>
               </span>
               <span color="grey" className="pointer noSelect pr5 fs12">
-                <span className="black">{resource.pricing}</span>
+                <span className="black">{resource.pricing.trim()}</span>
               </span>
 
               {/* <Header.Subheader> Napolean Hill </Header.Subheader> */}

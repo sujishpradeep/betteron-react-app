@@ -9,10 +9,13 @@ import {
   Header,
   Search,
   Radio,
-  Label
+  Label,
+  Container,
+  Icon
 } from "semantic-ui-react";
 import GoogleLogin from "react-google-login";
 import { addResources } from "../services/resourceservice";
+import SearchTag from "./searchtags";
 
 const Joi = require("joi");
 var _ = require("lodash");
@@ -28,9 +31,16 @@ class SubmitResource extends Component {
       gplaylink: "default",
       upvotes: "0",
       isApproved: "N",
-      tags: ""
+      tags: "  "
     },
-    errors: {}
+    tags: [],
+    errors: {},
+    values: [],
+    isSearchLoadings: []
+  };
+
+  componentDidMount = () => {
+    this.setState({ totalTags: 1 });
   };
 
   handleSubmit = async () => {
@@ -49,7 +59,9 @@ class SubmitResource extends Component {
     }
     try {
       console.log("this.state", this.state);
-      await addResources(this.state.addresource);
+      const { addresource } = this.state;
+      addresource.tags = this.state.tags.toString();
+      await addResources(addresource);
       window.location = "/";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -60,8 +72,14 @@ class SubmitResource extends Component {
     }
   };
 
+  handleNewTagAdd = tag => {
+    console.log("tags", this.state.tags);
+    this.setState({ tags: [...this.state.tags, tag] });
+  };
+
   validateResource = () => {
     const { addresource } = this.state;
+    addresource.tags = this.state.tags.toString();
     console.log("addresource 10", addresource);
 
     const options = { abortEarly: false };
@@ -76,45 +94,11 @@ class SubmitResource extends Component {
     }
   };
 
-  handleResultSelect = (e, result) => {
-    console.log("result name", result.result.title);
-    const { addresource } = this.state;
-    addresource.tags = result.result.title;
-    const errors = {};
-    this.setState({ value: result.result.title, addresource, errors });
-    console.log("errors", errors);
-  };
-
-  handleSearchChange = (e, { value }) => {
-    const initialState = { isSearchLoading: false, results: [], value: "" };
-    this.setState({ isSearchLoading: true, value });
-
-    var keys = { name: "title" };
-
-    var tags = this.props.tags.map(function(o) {
-      return _.mapKeys(o, function(v, k) {
-        return k in keys ? keys[k] : k;
-      });
-    });
-
-    setTimeout(() => {
-      if (this.state.value.length < 1) return this.setState(initialState);
-
-      const re = new RegExp(_.escapeRegExp(this.state.value), "i");
-      const isMatch = result => re.test(result.title);
-
-      this.setState({
-        isSearchLoading: false,
-        results: _.filter(tags, isMatch)
-      });
-    }, 300);
-  };
-
   handleChange = (event, { name, value }) => {
     if (this.state.addresource.hasOwnProperty(name)) {
       let { addresource } = this.state;
       addresource[name] = value;
-      this.setState({ addresource });
+      this.setState({ addresource, errors: {} });
     }
   };
 
@@ -127,7 +111,7 @@ class SubmitResource extends Component {
         };
       }),
     tags: Joi.string()
-      .required()
+      .optional()
       .error(err => {
         return {
           message: "Select a category from the list"
@@ -143,7 +127,7 @@ class SubmitResource extends Component {
       }),
 
     url: Joi.string()
-      .required()
+      .optional()
       .error(() => {
         return {
           message: `URL is required`
@@ -165,7 +149,6 @@ class SubmitResource extends Component {
   });
 
   handleRadioChange = (event, { name, value }) => {
-    console.log("name", name, value);
     if (this.state.addresource.hasOwnProperty(name)) {
       let { addresource } = this.state;
       addresource[name] = value;
@@ -174,11 +157,31 @@ class SubmitResource extends Component {
     }
   };
 
+  removeTag = t => {
+    const tags = [...this.state.tags]; // make a separate copy of the array
+    const index = tags.indexOf(t);
+    if (index !== -1) {
+      tags.splice(index, 1);
+      this.setState({ tags });
+    }
+  };
+
   render() {
-    const { isSearchLoading, results, value } = this.state;
+    let { totalTags } = this.state;
+
+    if (totalTags > 10) totalTags = 10;
+
+    console.log("totalTags", totalTags);
     const { errors } = this.state || {};
-    console.log("errors2", errors);
+    const { tags } = this.state || [];
+    console.log("tags", tags);
     console.log("tags", this.state.addresource.tags);
+
+    const filteredTags = this.props.tags.filter(
+      t => !this.state.tags.includes(t.name)
+    );
+
+    console.log("filteredTags", filteredTags);
 
     const disabled = !_.isEmpty(errors);
 
@@ -202,10 +205,11 @@ class SubmitResource extends Component {
           </div>
         </Modal.Header>
         <Modal.Content>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "left" }}>
             <form className="login">
               <Form>
                 <Form.Field>
+                  <label> Title</label>
                   <Form.Input
                     placeholder="Resoure Title"
                     name="name"
@@ -217,28 +221,46 @@ class SubmitResource extends Component {
                 </Form.Field>
 
                 <Form.Field>
-                  <Search
-                    input={{ fluid: true, error: errors["tags"] || false }}
-                    fluid
-                    icon="pink"
-                    placeholder="Category"
-                    noResultsMessage="Sorry, no results found"
-                    loading={isSearchLoading}
-                    onResultSelect={this.handleResultSelect}
-                    onSearchChange={_.debounce(this.handleSearchChange, 500, {
-                      leading: true
-                    })}
-                    results={results}
-                    value={value}
-                    {...this.props}
-                  />
+                  <label> Tags</label>
+
+                  <Container basic>
+                    <div>
+                      {tags &&
+                        tags.map((t, i) => (
+                          <Label>
+                            {t}
+                            <Icon
+                              name="delete"
+                              onClick={() => this.removeTag(t)}
+                            />
+                          </Label>
+                        ))}
+                    </div>
+
+                    <SearchTag
+                      tags={filteredTags}
+                      onNewTagAdd={this.handleNewTagAdd}
+                    ></SearchTag>
+
+                    {/* <div style={{ textAlign: "center" }}>
+                      <Button
+                        color="grey"
+                        basic
+                        circular
+                        onClick={() =>
+                          this.setState({ totalTags: totalTags + 1 })
+                        }
+                        icon="plus"
+                      ></Button>
+                    </div> */}
+                  </Container>
                 </Form.Field>
 
-                {errors["tags"] && (
+                {/* {errors["tags"] && (
                   <Label basic color="red" pointing="above">
                     {errors["tags"]}
                   </Label>
-                )}
+                )} */}
 
                 {/* <div size="large" style={{ textAlign: "left" }}>
                   <span style={{ color: "#999" }}>
@@ -247,6 +269,7 @@ class SubmitResource extends Component {
                   </span>
                 </div> */}
                 <Form.Field>
+                  <label> URL</label>
                   <Form.Input
                     placeholder=" URL of the Resource (Optional)"
                     name="url"
@@ -257,10 +280,11 @@ class SubmitResource extends Component {
                 </Form.Field>
 
                 <Form.Group inline>
-                  <span size="large" style={{ paddingRight: "200px" }}>
+                  {/* <span size="large" style={{ paddingRight: "200px" }}>
                     Type
-                  </span>
+                  </span> */}
                   <Form.Field inline>
+                    <label> Type</label>
                     <Radio
                       label="Book"
                       name="type"
@@ -289,12 +313,13 @@ class SubmitResource extends Component {
                   </Form.Field>
                 </Form.Group>
 
-                <Form.Group inline>
-                  <span size="large" style={{ paddingRight: "187px" }}>
+                <Form.Group>
+                  {/* <span size="large" style={{ paddingRight: "187px" }}>
                     Pricing
-                  </span>
+                  </span> */}
 
                   <Form.Field inline>
+                    <label> Pricing</label>
                     <Radio
                       label="Free"
                       name="pricing"
@@ -314,6 +339,7 @@ class SubmitResource extends Component {
                     />
                   </Form.Field>
                 </Form.Group>
+                <br></br>
 
                 <Button
                   type="submit"
