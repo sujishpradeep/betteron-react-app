@@ -114,6 +114,7 @@ class NavBar extends Component {
     this.setState({ submitModal });
   };
 
+  handleIconClose = () => this.setState({ closeIcon: true });
   render() {
     const {
       isMobile,
@@ -126,7 +127,8 @@ class NavBar extends Component {
       token,
       loginModal,
       signupModal,
-      submitModal
+      submitModal,
+      closeIcon
     } = this.state;
 
     const fullname = (token && token.fullname) || "";
@@ -143,11 +145,11 @@ class NavBar extends Component {
             size="tiny"
             open={submitModal}
             onClose={() => this.setState({ submitModal: false })}
+            closeIcon={closeIcon}
           >
             <SubmitResource
-              onSubmitModalClick={this.handleSubmitModalClick}
               tags={this.props.tags}
-              onClose={() => this.setState({ submitModal: false })}
+              onIconClose={this.handleIconClose}
             ></SubmitResource>
           </Modal>
           {isMobile && (

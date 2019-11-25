@@ -83,6 +83,7 @@ class SubmitResource extends Component {
           tags: "  "
         };
         this.setState({ isLoading: false, addresource, tags: [] });
+        this.props.onIconClose();
       }, 1000);
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -237,7 +238,7 @@ class SubmitResource extends Component {
             <React.Fragment>
               <Message success>
                 Thanks for submitting the resource. Our moderators would
-                evaluate your submission and have it published within 24 hours.
+                evaluate your submission and have it published in 24 hours.
               </Message>
               <Header as="h4" textAlign="center">
                 Make a New Submission
