@@ -11,6 +11,7 @@ import {
   Icon,
   Button
 } from "semantic-ui-react";
+import _ from "lodash";
 
 class TopicPage extends Component {
   state = {};
@@ -78,8 +79,11 @@ class TopicPage extends Component {
     this.setState({ topicname: topic });
   };
 
-  doSortAndFilter = resources => {
-    return resources;
+  doSortAndFilter = () => {
+    const { resources } = this.state;
+    const resourcesSorted = _.orderBy(resources, ["upvotes"], ["desc"]);
+
+    return resourcesSorted;
   };
 
   render() {
@@ -88,11 +92,11 @@ class TopicPage extends Component {
       isMobile,
       activeItem,
       filterVisible,
-      resources,
+
       topicname
     } = this.state;
 
-    const resourcesFiltered = this.doSortAndFilter(resources) || [];
+    const resourcesFiltered = this.doSortAndFilter() || [];
     const iconColor = filterVisible ? "blue" : "grey";
 
     return (
@@ -209,7 +213,7 @@ class TopicPage extends Component {
                     fontSize: "15px"
                   }}
                 >
-                  Top Personal Finance Applications And Resources
+                  {`Most Upvoted Applications And Resources on ${topicname} `}
                 </div>
 
                 {resourcesFiltered.map(r => (

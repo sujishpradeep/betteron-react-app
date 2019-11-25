@@ -8,9 +8,15 @@ import Login from "./login";
 
 // import { withRouter } from "react-router-dom";
 // import createHistory from "history/createBrowserHistory";
+import SubmitResource from "./submitres";
 
 class NavBar extends Component {
-  state = { isPageLoading: true, loginModal: false, signupModal: false };
+  state = {
+    isPageLoading: true,
+    loginModal: false,
+    signupModal: false,
+    submitModal: false
+  };
 
   constructor(props) {
     super(props);
@@ -103,6 +109,11 @@ class NavBar extends Component {
     this.setState({ signupModal, loginModal });
   };
 
+  handleSubmitClick = () => {
+    const submitModal = !this.state.submitModal;
+    this.setState({ submitModal });
+  };
+
   render() {
     const {
       isMobile,
@@ -114,7 +125,8 @@ class NavBar extends Component {
       isPageLoading,
       token,
       loginModal,
-      signupModal
+      signupModal,
+      submitModal
     } = this.state;
 
     const fullname = (token && token.fullname) || "";
@@ -127,6 +139,16 @@ class NavBar extends Component {
     return (
       <React.Fragment>
         <div className="navbar">
+          <Modal
+            size="tiny"
+            open={submitModal}
+            onClose={() => this.setState({ submitModal: false })}
+          >
+            <SubmitResource
+              onSubmitModalClick={this.handleSubmitModalClick}
+              tags={this.props.tags}
+            ></SubmitResource>
+          </Modal>
           {isMobile && (
             <React.Fragment>
               <Button
@@ -186,7 +208,10 @@ class NavBar extends Component {
                 />
               </div>
               <div className="nav-buttons">
-                <span className=" pointer main-button-font white login-button">
+                <span
+                  className=" pointer main-button-font white login-button"
+                  onClick={() => this.setState({ submitModal: true })}
+                >
                   <Icon name="plus circle"></Icon>Submit a Resource
                 </span>
 
@@ -236,7 +261,10 @@ class NavBar extends Component {
                 className="navbar-mob"
                 style={{ background: bgcolor, textAlign: "center" }}
               >
-                <div className="navbar-mob-item mbl white ">
+                <div
+                  className="navbar-mob-item mbl white "
+                  onClick={() => this.setState({ submitModal: true })}
+                >
                   Submit a Resource
                 </div>
 
