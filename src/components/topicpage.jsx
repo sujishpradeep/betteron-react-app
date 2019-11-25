@@ -9,12 +9,16 @@ import {
   Grid,
   Menu,
   Icon,
-  Button
+  Button,
+  Loader,
+  Dimmer,
+  Segment,
+  Divider
 } from "semantic-ui-react";
 import _ from "lodash";
 
 class TopicPage extends Component {
-  state = {};
+  state = { isLoading: true };
 
   constructor(props) {
     super(props);
@@ -23,7 +27,14 @@ class TopicPage extends Component {
   }
 
   async componentDidMount() {
-    this.setResources(this.props.match.params.topicname);
+    const topicname = this.props.match.params.topicname
+      .replace(/\b\w/g, l => l.toUpperCase())
+      .replace("-", " ");
+    this.setState({ isLoading: true, topicname });
+    setTimeout(() => {
+      this.setResources(this.props.match.params.topicname);
+    }, 500);
+
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
     window.scrollTo(0, 0);
@@ -36,6 +47,7 @@ class TopicPage extends Component {
       .replace(/\b\w/g, l => l.toUpperCase())
       .replace("-", " ");
 
+    this.setState({ isLoading: false });
     this.setState({ resources: data, topicname });
   }
 
@@ -43,7 +55,13 @@ class TopicPage extends Component {
     if (
       this.props.match.params.topicname !== prevProps.match.params.topicname
     ) {
-      this.setResources(this.props.match.params.topicname);
+      const topicname = this.props.match.params.topicname
+        .replace(/\b\w/g, l => l.toUpperCase())
+        .replace("-", " ");
+      this.setState({ isLoading: true, topicname, resources: [] });
+      setTimeout(() => {
+        this.setResources(this.props.match.params.topicname);
+      }, 500);
     }
   }
 
@@ -92,12 +110,13 @@ class TopicPage extends Component {
       isMobile,
       activeItem,
       filterVisible,
-
+      isLoading,
       topicname
     } = this.state;
 
     const resourcesFiltered = this.doSortAndFilter() || [];
     const iconColor = filterVisible ? "blue" : "grey";
+    console.log("isLoading", isLoading);
 
     return (
       <React.Fragment>
@@ -216,6 +235,14 @@ class TopicPage extends Component {
                   {`Most Upvoted Applications And Resources on ${topicname} `}
                 </div>
 
+                {isLoading && (
+                  <Segment basic>
+                    <Divider hidden></Divider>
+                    <Dimmer active inverted>
+                      <Loader inverted></Loader>
+                    </Dimmer>
+                  </Segment>
+                )}
                 {resourcesFiltered.map(r => (
                   <ResourceItem
                     key={r._id}
