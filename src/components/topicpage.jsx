@@ -311,13 +311,13 @@ class TopicPage extends Component {
                   </Segment>
                 )}
                 {!isLoading && _.isEmpty(resourcesFiltered) && (
-                  <Message info compact>
+                  <Message info size="tiny" compact>
                     <Message.Header>No Resources found</Message.Header>
                     <p>
-                      We're sorry, there are no resources available for the
-                      topic/selection you have searched for. If there is any
-                      relevant resource that you have found useful, please feel
-                      free to submit it here.
+                      We're sorry, no results are found at the moment for the
+                      topic/selection you have made. If there is any relevant
+                      resource in this category that you have found useful,
+                      please feel free to submit the resoure.
                     </p>
                   </Message>
                 )}

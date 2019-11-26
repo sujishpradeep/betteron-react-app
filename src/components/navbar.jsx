@@ -213,7 +213,11 @@ class NavBar extends Component {
               <div className="nav-buttons">
                 <span
                   className=" pointer main-button-font white login-button"
-                  onClick={() => this.setState({ submitModal: true })}
+                  onClick={() => {
+                    fullname
+                      ? this.setState({ submitModal: true })
+                      : this.setState({ signupModal: true });
+                  }}
                 >
                   <Icon name="plus circle"></Icon>Submit a Resource
                 </span>

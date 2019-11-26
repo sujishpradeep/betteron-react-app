@@ -238,7 +238,7 @@ class SubmitResource extends Component {
             <React.Fragment>
               <Message success>
                 Thanks for submitting the resource. Our moderators would
-                evaluate your submission and have it published in 24 hours.
+                evaluate your submission and have it published soon.
               </Message>
               <Header as="h4" textAlign="center">
                 Make a New Submission

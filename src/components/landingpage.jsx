@@ -82,11 +82,11 @@ class LandingPage extends Component {
             <div
               style={{ color: "#999", fontSize: "15px", textAlign: "center" }}
             >
-              Find the Resources which lets you scale up high
+              Learn and Share community enabling you to scale up to new heights
             </div>
           </Segment>
           <Header as="h1" textAlign="center">
-            Explore the Best Personal Development Apps, Books & Courses
+            Find the Best Personal Development Apps, Books & Courses
           </Header>
 
           <Divider hidden></Divider>
