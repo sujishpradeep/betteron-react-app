@@ -13,7 +13,8 @@ import {
   Loader,
   Dimmer,
   Segment,
-  Divider
+  Divider,
+  Message
 } from "semantic-ui-react";
 import _ from "lodash";
 
@@ -63,7 +64,14 @@ class TopicPage extends Component {
       const topicname = this.props.match.params.topicname
         .replace(/\b\w/g, l => l.toUpperCase())
         .replace("-", " ");
-      this.setState({ isLoading: true, topicname, resources: [] });
+      this.setState({
+        isLoading: true,
+        topicname,
+        resources: [],
+        filterType: "",
+        filterPricing: "",
+        filterVisible: false
+      });
       setTimeout(() => {
         this.setResources(this.props.match.params.topicname);
       }, 500);
@@ -301,6 +309,17 @@ class TopicPage extends Component {
                       <Loader inverted></Loader>
                     </Dimmer>
                   </Segment>
+                )}
+                {!isLoading && _.isEmpty(resourcesFiltered) && (
+                  <Message info compact>
+                    <Message.Header>No Resources found</Message.Header>
+                    <p>
+                      We're sorry, there are no resources available for the
+                      topic/selection you have searched for. If there is any
+                      relevant resource that you have found useful, please feel
+                      free to submit it here.
+                    </p>
+                  </Message>
                 )}
                 {resourcesFiltered.map(r => (
                   <ResourceItem
