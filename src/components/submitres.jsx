@@ -2,23 +2,19 @@ import React, { Component } from "react";
 
 import {
   Form,
-  Divider,
   Message,
   Modal,
   Button,
   Header,
-  Search,
   Radio,
   Label,
-  Container,
   Icon
 } from "semantic-ui-react";
-import GoogleLogin from "react-google-login";
 import { addResources } from "../services/resourceservice";
 import SearchTag from "./searchtags";
 
 const Joi = require("joi");
-var _ = require("lodash");
+
 class SubmitResource extends Component {
   state = {
     addresource: {

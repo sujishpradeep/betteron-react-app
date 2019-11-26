@@ -1,9 +1,7 @@
-import Login from "./login";
 import React, { Component } from "react";
 import {
   Form,
   Divider,
-  Segment,
   Message,
   Modal,
   Button,
@@ -12,7 +10,6 @@ import {
 
 import GoogleLogin from "react-google-login";
 import { signUp, logingoogle } from "../services/authservice";
-import { Link } from "react-router-dom";
 const Joi = require("joi");
 
 var _ = require("lodash");

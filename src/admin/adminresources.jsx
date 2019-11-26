@@ -11,11 +11,7 @@ import {
   Label
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import {
-  getAllResources,
-  addResources,
-  deleteResources
-} from "../services/resourceservice";
+import { getAllResources, addResources } from "../services/resourceservice";
 
 class AdminResources extends Component {
   state = {
@@ -81,8 +77,6 @@ class AdminResources extends Component {
 
   render() {
     const { tags } = this.state || [];
-
-    const { checkedValue } = this.state;
 
     return (
       <div style={{ margin: "20px" }}>

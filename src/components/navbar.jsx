@@ -149,6 +149,22 @@ class NavBar extends Component {
               onIconClose={this.handleIconClose}
             ></SubmitResource>
           </Modal>
+          <Modal
+            size="tiny"
+            open={signupModal}
+            onClose={() => this.setState({ signupModal: false })}
+          >
+            <Signup onLoginModalClick={this.handleLoginModalClick}></Signup>
+          </Modal>
+
+          <Modal
+            size="tiny"
+            open={loginModal}
+            onClose={() => this.setState({ loginModal: false })}
+          >
+            <Login onSignUpClick={this.handleSignUpClick}></Login>
+          </Modal>
+
           {isMobile && (
             <React.Fragment>
               <Button
@@ -227,23 +243,6 @@ class NavBar extends Component {
                     Login
                   </span>
                 )}
-                <Modal
-                  size="tiny"
-                  open={signupModal}
-                  onClose={() => this.setState({ signupModal: false })}
-                >
-                  <Signup
-                    onLoginModalClick={this.handleLoginModalClick}
-                  ></Signup>
-                </Modal>
-
-                <Modal
-                  size="tiny"
-                  open={loginModal}
-                  onClose={() => this.setState({ loginModal: false })}
-                >
-                  <Login onSignUpClick={this.handleSignUpClick}></Login>
-                </Modal>
 
                 {fullname && (
                   <span
@@ -284,24 +283,6 @@ class NavBar extends Component {
                     <Icon name="user"></Icon>Login
                   </span>
                 )}
-
-                <Modal
-                  size="tiny"
-                  open={signupModal}
-                  onClose={() => this.setState({ signupModal: false })}
-                >
-                  <Signup
-                    onLoginModalClick={this.handleLoginModalClick}
-                  ></Signup>
-                </Modal>
-
-                <Modal
-                  size="tiny"
-                  open={loginModal}
-                  onClose={() => this.setState({ loginModal: false })}
-                >
-                  <Login onSignUpClick={this.handleSignUpClick}></Login>
-                </Modal>
 
                 {fullname && (
                   <span

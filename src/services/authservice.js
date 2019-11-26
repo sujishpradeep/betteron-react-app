@@ -1,6 +1,4 @@
 import http from "./httpservice";
-import { apiUrl } from "../config";
-
 import config from "../config";
 
 const jwtDecode = require("jwt-decode");

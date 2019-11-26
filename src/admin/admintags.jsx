@@ -9,9 +9,7 @@ import {
   Modal,
   Form,
   Radio,
-  Input,
-  Checkbox,
-  Divider
+  Input
 } from "semantic-ui-react";
 
 class AdminTags extends Component {
@@ -70,8 +68,6 @@ class AdminTags extends Component {
 
   render() {
     const { tags } = this.state || [];
-
-    const { checkedValue } = this.state;
 
     return (
       <div style={{ margin: "20px" }}>

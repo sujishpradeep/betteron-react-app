@@ -17,16 +17,27 @@ import {
   Dimmer,
   Segment,
   Divider,
-  Message
+  Message,
+  Modal
 } from "semantic-ui-react";
 import _ from "lodash";
 import { addOrRemoveFromArray } from "../generic/arrays";
 import { getAccount, updateAccountUpvotes } from "../services/accountservice";
 import authservice from "../services/authservice";
 import update from "immutability-helper";
+import SubmitResource from "./submitres";
+import Signup from "./signup";
+import Login from "./login";
 
 class TopicPage extends Component {
-  state = { isLoading: true, filterType: "", filterPricing: "" };
+  state = {
+    isLoading: true,
+    filterType: "",
+    filterPricing: "",
+    loginModal: false,
+    signupModal: false,
+    submitModal: false
+  };
 
   constructor(props) {
     super(props);
@@ -52,8 +63,12 @@ class TopicPage extends Component {
 
     const token = authservice.getCurrentUser();
 
-    const { data } = await getAccount(token.accountid);
-    this.setState({ account: data });
+    if (token && token.accountid) {
+      const { data } = await getAccount(token.accountid);
+      this.setState({ account: data });
+    } else {
+      this.setState({ account: { upvotes: "" } });
+    }
 
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
@@ -129,7 +144,7 @@ class TopicPage extends Component {
     const filterType = this.state.filterType || "";
 
     if (filterType.length > 0) {
-      filtered = resources.filter(r => r.type.concat("s") === filterType);
+      filtered = filtered.filter(r => r.type.concat("s") === filterType);
     }
 
     const filterPricing = this.state.filterPricing || "";
@@ -138,7 +153,11 @@ class TopicPage extends Component {
       filtered = filtered.filter(r => r.pricing === filterPricing);
     }
 
-    const resourcesSorted = _.orderBy(filtered, ["upvotes"], ["desc"]);
+    let resourcesSorted = filtered;
+    console.log("resourcesSorted", resourcesSorted);
+
+    // resourcesSorted = _.orderBy(filtered, ["upvotes"], ["desc"]);
+
     return resourcesSorted;
   };
 
@@ -164,10 +183,10 @@ class TopicPage extends Component {
 
   handleUpvoteClick = async resource => {
     const { account } = this.state;
-    // if (!userInfo.username) {
-    //   window.location = "/login";
-    //   return;
-    // }
+    if (!(account && account._id)) {
+      this.setState({ signupModal: true });
+      return;
+    }
     console.log("ACCOUNT", this.state.account);
 
     let accountUpvotes = account.upvotes || [];
@@ -178,22 +197,40 @@ class TopicPage extends Component {
     resource.upvotes += counter;
     const { resources } = this.state;
     console.log("resources", resources);
-    var index = resources.findIndex(r => r._id == resource._id);
+    var index = resources.findIndex(r => r._id === resource._id);
 
     const updatedResources = update(this.state.resources, {
       $splice: [[index, 1, resource]]
     }); // array.splice(start, deleteCount, item1)
-    this.setState({ resources: updatedResources });
 
     console.log("resource.resourceid", resource._id);
 
     const upvotes = addOrRemoveFromArray(accountUpvotes, resource._id);
     account.upvotes = upvotes;
     console.log("resource.upvotes", { upvotes: resource.upvotes });
-    this.setState({ account });
+    this.setState({ account, resources: updatedResources });
 
     await updateResourceUpvotes(resource._id, resource);
     await updateAccountUpvotes(account._id, upvotes);
+  };
+
+  handleIconClose = () => this.setState({ closeIcon: true });
+
+  handleLoginModalClick = () => {
+    const loginModal = !this.state.loginModal;
+    const signupModal = false;
+    this.setState({ loginModal, signupModal });
+  };
+
+  handleSignUpClick = () => {
+    const signupModal = !this.state.signupModal;
+    const loginModal = false;
+    this.setState({ signupModal, loginModal });
+  };
+
+  handleSubmitClick = () => {
+    const submitModal = !this.state.submitModal;
+    this.setState({ submitModal });
   };
 
   render() {
@@ -205,15 +242,50 @@ class TopicPage extends Component {
       isLoading,
       topicname,
       filterType,
-      filterPricing
+      filterPricing,
+      submitModal,
+      loginModal,
+      signupModal,
+      closeIcon
     } = this.state;
 
-    const resourcesFiltered = this.doSortAndFilter() || [];
+    let accountUpvotes = (account && account.upvotes) || [];
+
+    let resourcesFiltered = [];
+    if (!isLoading) {
+      resourcesFiltered = this.doSortAndFilter();
+    }
     const iconColor = filterVisible ? "blue" : "grey";
 
     return (
       <React.Fragment>
         <NavBar tags={this.props.tags} history={this.props.history}></NavBar>
+        <Modal
+          size="tiny"
+          open={submitModal}
+          onClose={() => this.setState({ submitModal: false })}
+          closeIcon={closeIcon}
+        >
+          <SubmitResource
+            tags={this.props.tags}
+            onIconClose={this.handleIconClose}
+          ></SubmitResource>
+        </Modal>
+        <Modal
+          size="tiny"
+          open={signupModal}
+          onClose={() => this.setState({ signupModal: false })}
+        >
+          <Signup onLoginModalClick={this.handleLoginModalClick}></Signup>
+        </Modal>
+
+        <Modal
+          size="tiny"
+          open={loginModal}
+          onClose={() => this.setState({ loginModal: false })}
+        >
+          <Login onSignUpClick={this.handleSignUpClick}></Login>
+        </Modal>
         <div className="outer-container">
           <Container>
             <Grid columns={1}>
@@ -343,8 +415,14 @@ class TopicPage extends Component {
                     <p>
                       We're sorry, no results are found at the moment for the
                       topic/selection you have made. If there are any relevant
-                      resources in this category that you have found useful,
-                      please feel free to submit the resources.
+                      resources in this category that you would like to share
+                      with others, please feel free to
+                      <span
+                        onClick={() => this.setState({ submitModal: true })}
+                        className="pointer underline noSelect"
+                      >
+                        submit a resource.
+                      </span>
                     </p>
                   </Message>
                 )}
@@ -353,7 +431,7 @@ class TopicPage extends Component {
                     key={r._id}
                     resource={r}
                     history={this.props.history}
-                    liked={account.upvotes.includes(r._id)}
+                    liked={accountUpvotes.includes(r._id)}
                     onUpvoteClick={this.handleUpvoteClick}
                   />
                 ))}

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   Form,
   Divider,
-  Segment,
   Message,
   Modal,
   Button,
@@ -10,7 +9,7 @@ import {
 } from "semantic-ui-react";
 import GoogleLogin from "react-google-login";
 import { login, logingoogle } from "../services/authservice";
-import { Link } from "react-router-dom";
+
 var _ = require("lodash");
 
 class Login extends Component {
