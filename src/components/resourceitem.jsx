@@ -63,6 +63,11 @@ class ResourceItem extends Component {
               <span color="grey" className="pointer noSelect pr5 fs12">
                 <span className="black">{resource.pricing.trim()}</span>
               </span>
+              <Header.Subheader>
+                <p>
+                  Trello is a web-based Kanban-style list-making application.
+                </p>
+              </Header.Subheader>
 
               {/* <Header.Subheader> Napolean Hill </Header.Subheader> */}
             </Header>

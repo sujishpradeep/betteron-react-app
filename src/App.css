@@ -19,7 +19,7 @@
   background-color: #4885ed;
 }
 .underline {
-  --border-bottom: solid 1px rgb(26, 12, 216);
+  border-bottom: solid 1px #276f86;
   margin-left: 2px;
   font-weight: 600;
 }
