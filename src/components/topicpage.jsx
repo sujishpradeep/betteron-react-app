@@ -18,7 +18,7 @@ import {
 import _ from "lodash";
 
 class TopicPage extends Component {
-  state = { isLoading: true };
+  state = { isLoading: true, filterType: "", filterPricing: "" };
 
   constructor(props) {
     super(props);
@@ -30,7 +30,12 @@ class TopicPage extends Component {
     const topicname = this.props.match.params.topicname
       .replace(/\b\w/g, l => l.toUpperCase())
       .replace("-", " ");
-    this.setState({ isLoading: true, topicname });
+    this.setState({
+      isLoading: true,
+      topicname,
+      filterType: "",
+      filterPricing: ""
+    });
     setTimeout(() => {
       this.setResources(this.props.match.params.topicname);
     }, 500);
@@ -98,10 +103,61 @@ class TopicPage extends Component {
   };
 
   doSortAndFilter = () => {
-    const { resources } = this.state;
-    const resourcesSorted = _.orderBy(resources, ["upvotes"], ["desc"]);
+    const resources = this.state.resources || [];
+    console.log("resources", resources);
+
+    console.log("this.state.filterType", this.state.filterType);
+
+    let filtered = resources;
+
+    const filterType = this.state.filterType || "";
+
+    if (filterType.length > 0) {
+      console.log("check filter pricing", filterType.concat("s"));
+      filtered = resources.filter(r => r.type.concat("s") === filterType);
+    }
+
+    console.log("filtered 1", filtered);
+
+    const filterPricing = this.state.filterPricing || "";
+
+    if (filterPricing.length > 0) {
+      console.log("check filter pricing", filterPricing);
+      filtered = filtered.filter(r => r.pricing === filterPricing);
+    }
+
+    console.log("filtered 2", filtered);
+
+    const resourcesSorted = _.orderBy(filtered, ["upvotes"], ["desc"]);
+    console.log("resourcesSorted", resourcesSorted);
 
     return resourcesSorted;
+  };
+
+  checkboxChangeHandler = (e, data) => {
+    console.log("this.state.filterType 2", this.state.filterType);
+
+    if (data.name === "Type") {
+      console.log("data.name", data.name);
+      const filterType = data.value === this.state.filterType ? "" : data.value;
+      console.log("filterTypeXXX", filterType);
+      this.setState({ filterType });
+    }
+
+    if (data.name === "Pricing") {
+      const filterPricing =
+        data.value === this.state.filterPricing ? "" : data.value;
+      this.setState({ filterPricing });
+    }
+
+    const resources = this.state.resources;
+    this.setState({ isLoading: true, resources: [] });
+
+    setTimeout(() => {
+      this.setState({ isLoading: false, resources: resources });
+    }, 500);
+
+    console.log(data); // It is giving undefined here
   };
 
   render() {
@@ -111,12 +167,14 @@ class TopicPage extends Component {
       activeItem,
       filterVisible,
       isLoading,
-      topicname
+      topicname,
+      filterType,
+      filterPricing
     } = this.state;
 
     const resourcesFiltered = this.doSortAndFilter() || [];
     const iconColor = filterVisible ? "blue" : "grey";
-    console.log("isLoading", isLoading);
+    console.log("filterType", filterType);
 
     return (
       <React.Fragment>
@@ -167,33 +225,32 @@ class TopicPage extends Component {
                 <Grid.Column width={4}>
                   <Menu vertical>
                     <div style={{ background: "rgb(248, 248, 249)" }}>
-                      <Menu.Item
-                        name="promotions"
-                        active={activeItem === "promotions"}
-                        onClick={this.handleItemClick}
-                      >
+                      <Menu.Item>
                         <Header as="h4">Type of Resource</Header>
                         <Checkbox
                           label="Apps"
                           value="Apps"
-                          checked={value === "Apps"}
-                          onChange={this.handleChange}
+                          checked={filterType === "Apps"}
+                          onChange={this.checkboxChangeHandler}
+                          name="Type"
                         ></Checkbox>
                         <br></br>
                         <br></br>
                         <Checkbox
                           label="Books"
                           value="Books"
-                          checked={value === "Books"}
-                          onChange={this.handleChange}
+                          checked={filterType === "Books"}
+                          onChange={this.checkboxChangeHandler}
+                          name="Type"
                         ></Checkbox>
                         <br></br>
                         <br></br>
                         <Checkbox
                           label="Courses"
                           value="Courses"
-                          checked={value === "Courses"}
-                          onChange={this.handleChange}
+                          checked={filterType === "Courses"}
+                          onChange={this.checkboxChangeHandler}
+                          name="Type"
                         ></Checkbox>
                       </Menu.Item>
 
@@ -206,16 +263,18 @@ class TopicPage extends Component {
                         <Checkbox
                           label="Free"
                           value="Free"
-                          checked={value === "Free"}
-                          onChange={this.handleChange}
+                          checked={filterPricing === "Free"}
+                          onChange={this.checkboxChangeHandler}
+                          name="Pricing"
                         ></Checkbox>
                         <br></br>
                         <br></br>
                         <Checkbox
                           label="Paid"
                           value="Paid"
-                          checked={value === "Paid"}
-                          onChange={this.handleChange}
+                          checked={filterPricing === "Paid"}
+                          onChange={this.checkboxChangeHandler}
+                          name="Pricing"
                         ></Checkbox>
                       </Menu.Item>
                     </div>
