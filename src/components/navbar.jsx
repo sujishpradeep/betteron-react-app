@@ -28,8 +28,6 @@ class NavBar extends Component {
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
     const token = authservice.getCurrentUser() || {};
-
-    console.log("token", token);
     this.setState({ token, isPageLoading: false });
   }
 
@@ -132,7 +130,6 @@ class NavBar extends Component {
     } = this.state;
 
     const fullname = (token && token.fullname) || "";
-    console.log("loginModal", loginModal);
     if (isPageLoading)
       return <div style={{ height: "100%", width: "100%" }}></div>;
 
@@ -270,7 +267,11 @@ class NavBar extends Component {
               >
                 <div
                   className="navbar-mob-item mbl white "
-                  onClick={() => this.setState({ submitModal: true })}
+                  onClick={() => {
+                    fullname
+                      ? this.setState({ submitModal: true })
+                      : this.setState({ signupModal: true });
+                  }}
                 >
                   Submit a Resource
                 </div>

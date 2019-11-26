@@ -34,23 +34,19 @@ class AdminResources extends Component {
   };
 
   async componentDidMount() {
-    console.log("component Did Mount");
     this.refreshPage();
   }
 
   refreshPage = async () => {
     const { data } = await getAllResources();
-    console.log("data resources", data);
     this.setState({ tags: data });
   };
 
   handleDelete = async short => {
-    await deleteResources(short);
     this.refreshPage();
   };
 
   handleChange = (event, { name, value }) => {
-    console.log("name", name, value);
     if (this.state.addresource.hasOwnProperty(name)) {
       let { addresource } = this.state;
       addresource[name] = value;
@@ -61,8 +57,6 @@ class AdminResources extends Component {
 
   handleSubmit = async () => {
     // const { error } = this.validateReward();
-    console.log("this.state.addresource", this.state.addresource);
-
     await addResources(this.state.addresource);
 
     this.closeModal();

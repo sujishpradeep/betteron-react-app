@@ -47,8 +47,6 @@ class SubmitResource extends Component {
 
   handleSubmit = async () => {
     const { error } = this.validateResource();
-
-    console.log("error", error);
     const errors = {};
 
     if (error) {
@@ -60,7 +58,6 @@ class SubmitResource extends Component {
       return;
     }
     try {
-      console.log("this.state", this.state);
       const { addresource } = this.state;
       addresource.tags = this.state.tags.toString();
 
@@ -107,8 +104,6 @@ class SubmitResource extends Component {
   validateResource = () => {
     const { addresource } = this.state;
     addresource.tags = this.state.tags.toString();
-    console.log("addresource 10", addresource);
-
     const options = { abortEarly: false };
     return Joi.validate(addresource, this.schema, options);
   };
@@ -209,11 +204,6 @@ class SubmitResource extends Component {
     const filteredTags = this.props.tags.filter(
       t => !this.state.tags.includes(t.name)
     );
-
-    console.log("this.state.isLoading", this.state.isLoading);
-
-    const disabled = !_.isEmpty(errors);
-
     return (
       <React.Fragment>
         <Modal.Header>

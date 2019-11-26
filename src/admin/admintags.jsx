@@ -23,7 +23,6 @@ class AdminTags extends Component {
   };
 
   async componentDidMount() {
-    console.log("component Did Mount");
     this.refreshPage();
   }
 
@@ -38,7 +37,6 @@ class AdminTags extends Component {
   };
 
   handleChange = (event, { name, value }) => {
-    console.log("name", name, value);
     if (this.state.addtag.hasOwnProperty(name)) {
       let { addtag } = this.state;
       addtag[name] = value;
@@ -49,7 +47,6 @@ class AdminTags extends Component {
 
   handleSubmit = async () => {
     // const { error } = this.validateReward();
-    console.log("this.state.addtag", this.state.addtag);
 
     await addTags(this.state.addtag);
 

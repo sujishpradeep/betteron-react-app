@@ -5,12 +5,13 @@ class ResourceItem extends Component {
   state = {};
 
   handleLabelClick = topic => {
-    // console.log("this.props", this.props.history);
     this.props.history.push(`/topics/${topic}`);
   };
 
   render() {
     const { resource } = this.props;
+    const colorIcon = this.props.liked ? "green" : "grey";
+    const colorFont = this.props.liked ? "#21ba45" : "grey";
 
     return (
       <div
@@ -33,13 +34,14 @@ class ResourceItem extends Component {
               width: "50px",
               height: "60px"
             }}
+            onClick={() => this.props.onUpvoteClick(resource)}
           >
-            <Icon name="chevron up" color="grey"></Icon>
+            <Icon name="chevron up" color={colorIcon}></Icon>
             <span
               as="h1"
               style={{
                 fontSize: "23px",
-                color: "grey",
+                color: colorFont,
                 display: "block"
               }}
             >

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import NavBar from "./navbar";
-import { getResourcesByTag } from "../services/resourceservice";
+import {
+  getResourcesByTag,
+  updateResourceUpvotes
+} from "../services/resourceservice";
 import ResourceItem from "./resourceitem";
 import {
   Header,
@@ -17,6 +20,10 @@ import {
   Message
 } from "semantic-ui-react";
 import _ from "lodash";
+import { addOrRemoveFromArray } from "../generic/arrays";
+import { getAccount, updateAccountUpvotes } from "../services/accountservice";
+import authservice from "../services/authservice";
+import update from "immutability-helper";
 
 class TopicPage extends Component {
   state = { isLoading: true, filterType: "", filterPricing: "" };
@@ -31,6 +38,8 @@ class TopicPage extends Component {
     const topicname = this.props.match.params.topicname
       .replace(/\b\w/g, l => l.toUpperCase())
       .replace("-", " ");
+
+    // const { _id: userid, upvotes } = this.props.token;
     this.setState({
       isLoading: true,
       topicname,
@@ -40,6 +49,11 @@ class TopicPage extends Component {
     setTimeout(() => {
       this.setResources(this.props.match.params.topicname);
     }, 500);
+
+    const token = authservice.getCurrentUser();
+
+    const { data } = await getAccount(token.accountid);
+    this.setState({ account: data });
 
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
@@ -106,49 +120,31 @@ class TopicPage extends Component {
   };
 
   handleLabelClick = topic => {
-    // console.log("this.props", this.props.history);
     this.setState({ topicname: topic });
   };
 
   doSortAndFilter = () => {
     const resources = this.state.resources || [];
-    console.log("resources", resources);
-
-    console.log("this.state.filterType", this.state.filterType);
-
-    let filtered = resources;
-
+    let filtered = resources.filter(r => r.isApproved === "Y");
     const filterType = this.state.filterType || "";
 
     if (filterType.length > 0) {
-      console.log("check filter pricing", filterType.concat("s"));
       filtered = resources.filter(r => r.type.concat("s") === filterType);
     }
-
-    console.log("filtered 1", filtered);
 
     const filterPricing = this.state.filterPricing || "";
 
     if (filterPricing.length > 0) {
-      console.log("check filter pricing", filterPricing);
       filtered = filtered.filter(r => r.pricing === filterPricing);
     }
 
-    console.log("filtered 2", filtered);
-
     const resourcesSorted = _.orderBy(filtered, ["upvotes"], ["desc"]);
-    console.log("resourcesSorted", resourcesSorted);
-
     return resourcesSorted;
   };
 
   checkboxChangeHandler = (e, data) => {
-    console.log("this.state.filterType 2", this.state.filterType);
-
     if (data.name === "Type") {
-      console.log("data.name", data.name);
       const filterType = data.value === this.state.filterType ? "" : data.value;
-      console.log("filterTypeXXX", filterType);
       this.setState({ filterType });
     }
 
@@ -164,13 +160,45 @@ class TopicPage extends Component {
     setTimeout(() => {
       this.setState({ isLoading: false, resources: resources });
     }, 500);
+  };
 
-    console.log(data); // It is giving undefined here
+  handleUpvoteClick = async resource => {
+    const { account } = this.state;
+    // if (!userInfo.username) {
+    //   window.location = "/login";
+    //   return;
+    // }
+    console.log("ACCOUNT", this.state.account);
+
+    let accountUpvotes = account.upvotes || [];
+
+    //onPeaceClick -> add 1 to peaceCount of the trail, if user has not peaceMarked in original State,
+    //                reduce 1 from peaceCount if user has already peaceMarked in original State
+    const counter = accountUpvotes.includes(resource._id) ? -1 : 1;
+    resource.upvotes += counter;
+    const { resources } = this.state;
+    console.log("resources", resources);
+    var index = resources.findIndex(r => r._id == resource._id);
+
+    const updatedResources = update(this.state.resources, {
+      $splice: [[index, 1, resource]]
+    }); // array.splice(start, deleteCount, item1)
+    this.setState({ resources: updatedResources });
+
+    console.log("resource.resourceid", resource._id);
+
+    const upvotes = addOrRemoveFromArray(accountUpvotes, resource._id);
+    account.upvotes = upvotes;
+    console.log("resource.upvotes", { upvotes: resource.upvotes });
+    this.setState({ account });
+
+    await updateResourceUpvotes(resource._id, resource);
+    await updateAccountUpvotes(account._id, upvotes);
   };
 
   render() {
     const {
-      value,
+      account,
       isMobile,
       activeItem,
       filterVisible,
@@ -182,7 +210,6 @@ class TopicPage extends Component {
 
     const resourcesFiltered = this.doSortAndFilter() || [];
     const iconColor = filterVisible ? "blue" : "grey";
-    console.log("filterType", filterType);
 
     return (
       <React.Fragment>
@@ -315,9 +342,9 @@ class TopicPage extends Component {
                     <Message.Header>No Resources found</Message.Header>
                     <p>
                       We're sorry, no results are found at the moment for the
-                      topic/selection you have made. If there is any relevant
-                      resource in this category that you have found useful,
-                      please feel free to submit the resoure.
+                      topic/selection you have made. If there are any relevant
+                      resources in this category that you have found useful,
+                      please feel free to submit the resources.
                     </p>
                   </Message>
                 )}
@@ -326,6 +353,8 @@ class TopicPage extends Component {
                     key={r._id}
                     resource={r}
                     history={this.props.history}
+                    liked={account.upvotes.includes(r._id)}
+                    onUpvoteClick={this.handleUpvoteClick}
                   />
                 ))}
               </Grid.Column>

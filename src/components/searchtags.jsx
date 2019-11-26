@@ -6,8 +6,6 @@ var _ = require("lodash");
 class SearchTag extends Component {
   state = {};
   handleResultSelect = (e, result) => {
-    console.log("result name", result.result.title);
-
     this.setState({
       value: ""
     });

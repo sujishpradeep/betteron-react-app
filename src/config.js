@@ -1,5 +1,5 @@
 const dev = {
-  API_URL: "https://www.myunspent.com"
+  API_URL: "http://localhost:3005"
 };
 
 const prod = {

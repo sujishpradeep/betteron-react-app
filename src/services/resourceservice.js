@@ -11,6 +11,10 @@ export function getResourcesByTag(tag) {
   return http.get(`${apiResources}/findbytag/${tag}`);
 }
 
+export function updateResourceUpvotes(id, upvotes) {
+  return http.put(apiResources + "/upvotes/" + id, upvotes);
+}
+
 export function deleteResources(id) {
   return http.delete(`${apiResources}/${id}`);
 }
