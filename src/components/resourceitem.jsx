@@ -64,9 +64,7 @@ class ResourceItem extends Component {
                 <span className="black">{resource.pricing.trim()}</span>
               </span>
               <Header.Subheader>
-                {/* <p>
-                  Trello is a web-based Kanban-style list-making application.
-                </p> */}
+                <p>{resource.description}</p>
               </Header.Subheader>
 
               {/* <Header.Subheader> Napolean Hill </Header.Subheader> */}
