@@ -14,11 +14,14 @@ import NavBar from "./navbar";
 
 class AboutUs extends Component {
   state = {};
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     const { submitModal } = this.state;
     return (
       <React.Fragment>
-        <NavBar></NavBar>
+        <NavBar tags={this.props.tags} history={this.props.history}></NavBar>
         <Modal
           size="tiny"
           open={submitModal}

@@ -35,7 +35,11 @@ class App extends Component {
                 <TopicPage {...props} tags={tags} token={token} />
               )}
             />
-            <Route path="/aboutus" component={AboutUs} />
+
+            <Route
+              path="/aboutus"
+              render={props => <AboutUs {...props} tags={tags} />}
+            />
 
             <Route
               path="/admin/tags"
