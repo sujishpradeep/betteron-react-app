@@ -433,6 +433,7 @@ class TopicPage extends Component {
                     history={this.props.history}
                     liked={accountUpvotes.includes(r._id)}
                     onUpvoteClick={this.handleUpvoteClick}
+                    isMobile={isMobile}
                   />
                 ))}
               </Grid.Column>
