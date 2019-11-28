@@ -11,6 +11,7 @@ import TopicPage from "./components/topicpage";
 import AdminTags from "./admin/admintags";
 import AdminResources from "./admin/adminresources";
 import authservice from "./services/authservice";
+import AboutUs from "./components/aboutus";
 
 class App extends Component {
   state = {};
@@ -34,6 +35,7 @@ class App extends Component {
                 <TopicPage {...props} tags={tags} token={token} />
               )}
             />
+            <Route path="/aboutus" component={AboutUs} />
 
             <Route
               path="/admin/tags"

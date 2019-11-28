@@ -1,15 +1,62 @@
-import React from "react";
-import { Segment } from "semantic-ui-react";
+import React, { Component } from "react";
+import { Segment, Modal } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import ContactUs from "./contactus";
 
-const Footer = () => {
-  return (
-    <Segment basic textAlign="center">
-      <span className="footer-menu">Home</span>
-      <span className="footer-menu">About us</span>
-      <span className="footer-menu">Feedback</span>
-      <span className="footer-menu">Contact us</span>
-    </Segment>
-  );
-};
+class Footer extends Component {
+  state = {};
+  render() {
+    const { submitModal } = this.state;
+
+    return (
+      <React.Fragment>
+        <Modal
+          size="tiny"
+          open={submitModal}
+          onClose={() => this.setState({ submitModal: false })}
+          closeIcon
+        >
+          <ContactUs
+            formtype={this.state.formtype}
+            messagetype={this.state.messagetype}
+            onIconClose={this.handleIconClose}
+          ></ContactUs>
+        </Modal>
+        <Segment basic textAlign="center">
+          <Link to="/">
+            <span className="footer-menu noSelect">Home</span>
+          </Link>
+          <Link to="/aboutus">
+            <span className="footer-menu noSelect">About us</span>
+          </Link>
+          <span
+            className="footer-menu noSelect"
+            onClick={() =>
+              this.setState({
+                submitModal: true,
+                formtype: "Send us a feedback",
+                messagetype: "feedback"
+              })
+            }
+          >
+            Feedback
+          </span>
+          <span
+            className="footer-menu noSelect"
+            onClick={() =>
+              this.setState({
+                submitModal: true,
+                formtype: "Contact Us",
+                messagetype: "message"
+              })
+            }
+          >
+            Contact us
+          </span>
+        </Segment>
+      </React.Fragment>
+    );
+  }
+}
 
 export default Footer;
