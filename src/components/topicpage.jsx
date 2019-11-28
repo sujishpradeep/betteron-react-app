@@ -28,6 +28,7 @@ import update from "immutability-helper";
 import SubmitResource from "./submitres";
 import Signup from "./signup";
 import Login from "./login";
+import { Helmet } from "react-helmet";
 
 class TopicPage extends Component {
   state = {
@@ -259,6 +260,15 @@ class TopicPage extends Component {
 
     return (
       <React.Fragment>
+        <Helmet>
+          <title>
+            {`${topicname} - Find the Best Apps, Books and Videos on ${topicname}, submitted and upvoted by Betteron community!`}
+          </title>
+          <meta
+            name="description"
+            content={`Want to find Apps, Books and Videos that would help you with ${topicname}? Check out these resources maintainted by Betteron community. Pick one based on your preference and learn and practice the tips and tricks to help you on ${topicname}.`}
+          />
+        </Helmet>
         <NavBar tags={this.props.tags} history={this.props.history}></NavBar>
         <Modal
           size="tiny"
@@ -411,12 +421,10 @@ class TopicPage extends Component {
                 )}
                 {!isLoading && _.isEmpty(resourcesFiltered) && (
                   <Message info size="tiny" compact>
-                    <Message.Header>No Resources found</Message.Header>
                     <p>
-                      We're sorry, no results are found at the moment for the
-                      topic/selection you have made. If there are any relevant
-                      resources in this category that you would like to share
-                      with others, please feel free to
+                      This topic does not have any resources yet. If there are
+                      any relevant resources in this topic that you would like
+                      to share with others, please feel free to
                       <span
                         onClick={() => this.setState({ submitModal: true })}
                         className="pointer underline noSelect"

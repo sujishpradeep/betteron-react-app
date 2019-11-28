@@ -12,6 +12,7 @@ import AdminTags from "./admin/admintags";
 import AdminResources from "./admin/adminresources";
 import authservice from "./services/authservice";
 import AboutUs from "./components/aboutus";
+import { Helmet } from "react-helmet";
 
 class App extends Component {
   state = {};
@@ -27,6 +28,15 @@ class App extends Component {
     const { tags, token } = this.state;
     return (
       <React.Fragment>
+        <Helmet>
+          <title>
+            {`Find the Best Apps, Books and Videos on Personal Development, Croudsourced at Betteron`}
+          </title>
+          <meta
+            name="description"
+            content={`Want to find Apps, Books and Videos that would help you with Personal Development? Check out these resources maintainted by Betteron community. Pick one based on your preference and learn and practice the tips and tricks to help you on Personal Development.`}
+          />
+        </Helmet>
         <Router>
           <Switch>
             <Route

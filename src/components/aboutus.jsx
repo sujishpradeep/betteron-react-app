@@ -64,10 +64,10 @@ class AboutUs extends Component {
             <Image src={aboutus} size="huge" circular centered></Image>
             <Header as="h1" textAlign="">
               <span style={{ fontSize: "35px", fontFamily: "Raleway" }}>
-                About us
+                Preface
               </span>
             </Header>
-            <Divider hidden></Divider>
+
             <p
               style={{
                 fontSize: "18px",
@@ -79,8 +79,21 @@ class AboutUs extends Component {
               entire life. Making small and continuous improvement in growing
               yourself scales you up in all spheres, opens up new avenues of
               growth and improves your quality of life immensely.
-              <br></br>
-              <br></br>
+            </p>
+
+            <Header as="h1" textAlign="">
+              <span style={{ fontSize: "35px", fontFamily: "Raleway" }}>
+                About us
+              </span>
+            </Header>
+
+            <p
+              style={{
+                fontSize: "18px",
+                lineHeight: "30px",
+                fontFamily: "Raleway"
+              }}
+            >
               At Betteron, we believe that the best way to develop yourself is
               by following the Learn, Plan and Practice method. Although there
               are plenty of tools out there - Apps, Books, Videos and many more
