@@ -23,8 +23,8 @@ class Footer extends Component {
           ></ContactUs>
         </Modal>
         <Segment basic textAlign="center">
-          <Link to="/blogs">
-            <span className="footer-menu noSelect">Blogs</span>
+          <Link to="/">
+            <span className="footer-menu noSelect">Home</span>
           </Link>
           <Link to="/aboutus">
             <span className="footer-menu noSelect">About us</span>

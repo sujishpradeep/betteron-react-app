@@ -79,14 +79,14 @@ class LandingPage extends Component {
               {/* <i className="fas fa-chevron-circle-up "></i> */}
               <Icon name="chevron circle up"></Icon>
             </div>
-            <div
+            {/* <div
               style={{ color: "#999", fontSize: "15px", textAlign: "center" }}
             >
               Learn and Share community enabling you to scale up to new heights
-            </div>
+            </div> */}
           </Segment>
           <Header as="h1" textAlign="center">
-            Find the Best Personal Development Apps, Books & Courses
+            Find the Best Personal Development Books & Apps
           </Header>
 
           <Divider hidden></Divider>

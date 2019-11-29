@@ -62,13 +62,13 @@ class ResourceItem extends Component {
                 >
                   {resource.name}
                 </span>
-
+                {/* 
                 <span color="grey" className="pointer noSelect pr5 fs12 ">
-                  <span className="black">{resource.type}/</span>
-                </span>
-                <span color="grey" className="pointer noSelect pr5 fs12">
+                  <span className="grey">({resource.type})</span>
+                </span> */}
+                {/* <span color="grey" className="pointer noSelect pr5 fs12">
                   <span className="black">{resource.pricing.trim()}</span>
-                </span>
+                </span> */}
                 <Header.Subheader>
                   <p>{resource.description}</p>
                 </Header.Subheader>
@@ -76,18 +76,22 @@ class ResourceItem extends Component {
                 {/* <Header.Subheader> Napolean Hill </Header.Subheader> */}
               </Header>
 
-              {resource.tags.map(t => (
-                <Label
-                  color="yellow"
-                  className="pointer noSelect pr5 mt5"
-                  onClick={() => this.handleLabelClick(t)}
-                  key={t}
-                >
-                  <span className="black">
-                    {t.replace(/\b\w/g, l => l.toUpperCase()).replace("-", " ")}
-                  </span>
-                </Label>
-              ))}
+              {resource.tags
+                .filter(t => t !== this.props.topicname)
+                .map(t => (
+                  <Label
+                    color="yellow"
+                    className="pointer noSelect pr5 mt5"
+                    onClick={() => this.handleLabelClick(t)}
+                    key={t}
+                  >
+                    <span className="black">
+                      {t
+                        .replace(/\b\w/g, l => l.toUpperCase())
+                        .replace("-", " ")}
+                    </span>
+                  </Label>
+                ))}
               <br></br>
             </div>
           </Grid.Column>

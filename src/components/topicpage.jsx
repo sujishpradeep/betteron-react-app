@@ -33,7 +33,7 @@ import { Helmet } from "react-helmet";
 class TopicPage extends Component {
   state = {
     isLoading: true,
-    filterType: "",
+    filterType: "Books",
     filterPricing: "",
     loginModal: false,
     signupModal: false,
@@ -55,7 +55,7 @@ class TopicPage extends Component {
     this.setState({
       isLoading: true,
       topicname,
-      filterType: "",
+      filterType: "Books",
       filterPricing: ""
     });
     setTimeout(() => {
@@ -98,9 +98,8 @@ class TopicPage extends Component {
         isLoading: true,
         topicname,
         resources: [],
-        filterType: "",
-        filterPricing: "",
-        filterVisible: false
+        filterType: "Books",
+        filterPricing: ""
       });
       setTimeout(() => {
         this.setResources(this.props.match.params.topicname);
@@ -130,10 +129,10 @@ class TopicPage extends Component {
     this.setState({ activeIndex: newIndex });
   };
 
-  handleFilterClick = () => {
-    const filterVisible = !this.state.filterVisible;
-    this.setState({ filterVisible });
-  };
+  // handleFilterClick = () => {
+  //   const filterVisible = !this.state.filterVisible;
+  //   this.setState({ filterVisible });
+  // };
 
   handleLabelClick = topic => {
     this.setState({ topicname: topic });
@@ -239,7 +238,7 @@ class TopicPage extends Component {
       account,
       isMobile,
       activeItem,
-      filterVisible,
+
       isLoading,
       topicname,
       filterType,
@@ -256,7 +255,8 @@ class TopicPage extends Component {
     if (!isLoading) {
       resourcesFiltered = this.doSortAndFilter();
     }
-    const iconColor = filterVisible ? "blue" : "grey";
+    // const filterVisible = true;
+    // const iconColor = filterVisible ? "blue" : "grey";
 
     return (
       <React.Fragment>
@@ -312,7 +312,7 @@ class TopicPage extends Component {
               </Grid.Column>
             </Grid>
 
-            {isMobile && (
+            {/* {isMobile && (
               <Grid columns={1}>
                 <Grid.Column className="pt0 pb0">
                   <Button
@@ -335,16 +335,37 @@ class TopicPage extends Component {
                   </Button>
                 </Grid.Column>
               </Grid>
-            )}
+            )} */}
 
             <Grid columns={2} stackable>
-              {(!isMobile || filterVisible) && (
-                <Grid.Column width={4}>
-                  <Menu vertical>
-                    <div style={{ background: "rgb(248, 248, 249)" }}>
-                      <Menu.Item>
-                        <Header as="h4">Type of Resource</Header>
-                        <Checkbox
+              <Grid.Column width={4}>
+                <Menu
+                  vertical={!isMobile}
+                  fluid={isMobile}
+                  widths={isMobile ? 2 : 1}
+                  color="blue"
+                  size="large"
+                >
+                  <Menu.Item
+                    active={filterType === "Books"}
+                    onClick={() => this.setState({ filterType: "Books" })}
+                  >
+                    <span>
+                      Books &nbsp;
+                      <Icon name="leanpub" size="large"></Icon>
+                    </span>
+                  </Menu.Item>
+                  <Menu.Item
+                    active={filterType === "Apps"}
+                    onClick={() => this.setState({ filterType: "Apps" })}
+                  >
+                    <span>
+                      Apps &nbsp;
+                      <Icon name="mobile alternate" size="large"></Icon>
+                    </span>
+                  </Menu.Item>
+                </Menu>
+                {/* <Checkbox
                           label="Apps"
                           value="Apps"
                           checked={filterType === "Apps"}
@@ -361,17 +382,16 @@ class TopicPage extends Component {
                           name="Type"
                         ></Checkbox>
                         <br></br>
-                        <br></br>
-                        <Checkbox
+                        <br></br> */}
+                {/* <Checkbox
                           label="Courses"
                           value="Courses"
                           checked={filterType === "Courses"}
                           onChange={this.checkboxChangeHandler}
                           name="Type"
-                        ></Checkbox>
-                      </Menu.Item>
+                        ></Checkbox> */}
 
-                      <Menu.Item
+                {/* <Menu.Item
                         name="coupons"
                         active={activeItem === "coupons"}
                         onClick={this.handleItemClick}
@@ -393,13 +413,12 @@ class TopicPage extends Component {
                           onChange={this.checkboxChangeHandler}
                           name="Pricing"
                         ></Checkbox>
-                      </Menu.Item>
-                    </div>
-                  </Menu>
-                </Grid.Column>
-              )}
+                      </Menu.Item> */}
+                {/* </div> */}
+              </Grid.Column>
 
               <Grid.Column width={12}>
+                {/* {!isMobile && ( */}
                 <div
                   style={{
                     padding: "10px",
@@ -408,8 +427,9 @@ class TopicPage extends Component {
                     fontSize: "15px"
                   }}
                 >
-                  {`Most Upvoted Applications And Resources on ${topicname} `}
+                  {`Most Upvoted ${filterType} on ${topicname} `}
                 </div>
+                {/* )} */}
 
                 {isLoading && (
                   <Segment basic>
@@ -442,6 +462,7 @@ class TopicPage extends Component {
                     liked={accountUpvotes.includes(r._id)}
                     onUpvoteClick={this.handleUpvoteClick}
                     isMobile={isMobile}
+                    topicname={topicname}
                   />
                 ))}
               </Grid.Column>

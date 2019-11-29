@@ -38,9 +38,9 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.ui.vertical.menu {
+/* .ui.vertical.menu {
   background: rgb(248, 248, 249);
-}
+} */
 
 .ui.yellow.label {
   background-color: #e6eeff !important;
