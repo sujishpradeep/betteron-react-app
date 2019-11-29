@@ -13,8 +13,8 @@ class ResourceItem extends Component {
     const colorIcon = this.props.liked ? "green" : "grey";
     const colorFont = this.props.liked ? "#21ba45" : "grey";
     const upvotebk = this.props.liked ? "#defade" : "#f3f4f5";
-    const width_1 = isMobile ? 2 : 1;
-    const width_2 = isMobile ? 14 : 15;
+    const width_1 = isMobile ? 3 : 1;
+    const width_2 = isMobile ? 13 : 15;
 
     return (
       <div
@@ -54,7 +54,7 @@ class ResourceItem extends Component {
             </div>
           </Grid.Column>
           <Grid.Column width={width_2}>
-            <div style={{ paddingLeft: "10px" }}>
+            <div>
               <Header as="h2" className="mb5">
                 <span
                   className="hover pointer noSelect pr5 "

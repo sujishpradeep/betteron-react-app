@@ -304,7 +304,7 @@ class TopicPage extends Component {
                   <Header.Content>
                     {topicname}
                     <Header.Subheader>
-                      {`Find Apps, Books and Courses submitted and voted by
+                      {`Find Books and Apps submitted and voted by
                       betteron Community on the topic of ${topicname}`}
                     </Header.Subheader>
                   </Header.Content>
