@@ -13,6 +13,7 @@ import AdminResources from "./admin/adminresources";
 import authservice from "./services/authservice";
 import AboutUs from "./components/aboutus";
 import { Helmet } from "react-helmet";
+import Blogs from "./components/blogs";
 
 class App extends Component {
   state = {};
@@ -44,6 +45,11 @@ class App extends Component {
               render={props => (
                 <TopicPage {...props} tags={tags} token={token} />
               )}
+            />
+
+            <Route
+              path="/blogs"
+              render={props => <Blogs {...props} tags={tags} />}
             />
 
             <Route
