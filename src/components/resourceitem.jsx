@@ -13,8 +13,8 @@ class ResourceItem extends Component {
     const colorIcon = this.props.liked ? "green" : "grey";
     const colorFont = this.props.liked ? "#21ba45" : "grey";
     const upvotebk = this.props.liked ? "#defade" : "#f3f4f5";
-    const width_1 = isMobile ? 3 : 1;
-    const width_2 = isMobile ? 13 : 15;
+    const width_1 = isMobile ? 3 : 2;
+    const width_2 = isMobile ? 13 : 14;
 
     return (
       <div

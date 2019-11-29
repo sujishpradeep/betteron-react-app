@@ -12,6 +12,5 @@ export function deleteFeedback(id) {
 }
 
 export function addFeedback(feedback) {
-  //   console.log("feedback", feedback);
   return http.post(apiFeedback, feedback);
 }

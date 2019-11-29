@@ -51,6 +51,9 @@ class TopicPage extends Component {
       .replace(/\b\w/g, l => l.toUpperCase())
       .replace("-", " ");
 
+    this.updateWindowDimensions();
+    window.addEventListener("resize", this.updateWindowDimensions);
+    window.scrollTo(0, 0);
     // const { _id: userid, upvotes } = this.props.token;
     this.setState({
       isLoading: true,
@@ -70,10 +73,6 @@ class TopicPage extends Component {
     } else {
       this.setState({ account: { upvotes: "" } });
     }
-
-    this.updateWindowDimensions();
-    window.addEventListener("resize", this.updateWindowDimensions);
-    window.scrollTo(0, 0);
   }
 
   async setResources(topicname) {
@@ -141,7 +140,7 @@ class TopicPage extends Component {
   doSortAndFilter = () => {
     const resources = this.state.resources || [];
     let filtered = resources.filter(r => r.isApproved === "Y");
-    const filterType = this.state.filterType || "";
+    const filterType = this.state.filterType || "Books";
 
     if (filterType.length > 0) {
       filtered = filtered.filter(r => r.type.concat("s") === filterType);
@@ -154,10 +153,6 @@ class TopicPage extends Component {
     }
 
     let resourcesSorted = filtered;
-    console.log("resourcesSorted", resourcesSorted);
-
-    // resourcesSorted = _.orderBy(filtered, ["upvotes"], ["desc"]);
-
     return resourcesSorted;
   };
 
@@ -187,7 +182,6 @@ class TopicPage extends Component {
       this.setState({ signupModal: true });
       return;
     }
-    console.log("ACCOUNT", this.state.account);
 
     let accountUpvotes = account.upvotes || [];
 
@@ -196,18 +190,14 @@ class TopicPage extends Component {
     const counter = accountUpvotes.includes(resource._id) ? -1 : 1;
     resource.upvotes += counter;
     const { resources } = this.state;
-    console.log("resources", resources);
     var index = resources.findIndex(r => r._id === resource._id);
 
     const updatedResources = update(this.state.resources, {
       $splice: [[index, 1, resource]]
     }); // array.splice(start, deleteCount, item1)
 
-    console.log("resource.resourceid", resource._id);
-
     const upvotes = addOrRemoveFromArray(accountUpvotes, resource._id);
     account.upvotes = upvotes;
-    console.log("resource.upvotes", { upvotes: resource.upvotes });
     this.setState({ account, resources: updatedResources });
 
     await updateResourceUpvotes(resource._id, resource);
@@ -241,15 +231,14 @@ class TopicPage extends Component {
 
       isLoading,
       topicname,
-      filterType,
+
       filterPricing,
       submitModal,
       loginModal,
       signupModal,
       closeIcon
     } = this.state;
-
-    console.log("isMobile", isMobile);
+    let filterType = this.state.filterType || "Books";
 
     let accountUpvotes = (account && account.upvotes) || [];
 
@@ -300,9 +289,11 @@ class TopicPage extends Component {
         </Modal>
         <div className="outer-container">
           <Container>
-            <Grid columns={1}>
-              <Grid.Column>
-                <Header as="h1" style={{ paddingTop: "10px" }}>
+            <Grid columns={2}>
+              {!isMobile && <Grid.Column width={1}></Grid.Column>}
+
+              <Grid.Column width={15}>
+                <Header as="h1" style={{ paddingTop: "1em" }}>
                   <Header.Content>
                     {topicname}
                     <Header.Subheader>
@@ -339,7 +330,8 @@ class TopicPage extends Component {
               </Grid>
             )} */}
 
-            <Grid columns={2} stackable>
+            <Grid columns={3} stackable>
+              {!isMobile && <Grid.Column width={1}></Grid.Column>}
               <Grid.Column width={4}>
                 <Menu
                   vertical={!isMobile}
@@ -419,7 +411,7 @@ class TopicPage extends Component {
                 {/* </div> */}
               </Grid.Column>
 
-              <Grid.Column width={12}>
+              <Grid.Column width={8}>
                 {/* {!isMobile && ( */}
                 <div
                   style={{
@@ -470,6 +462,7 @@ class TopicPage extends Component {
               </Grid.Column>
             </Grid>
           </Container>
+          <Divider hidden></Divider>
         </div>
       </React.Fragment>
     );
