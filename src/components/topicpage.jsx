@@ -98,12 +98,12 @@ class TopicPage extends Component {
         isLoading: true,
         topicname,
         resources: [],
-        filterType: "Books",
         filterPricing: ""
       });
       setTimeout(() => {
         this.setResources(this.props.match.params.topicname);
       }, 500);
+      window.scrollTo(0, 0);
     }
   }
 
@@ -248,6 +248,8 @@ class TopicPage extends Component {
       signupModal,
       closeIcon
     } = this.state;
+
+    console.log("isMobile", isMobile);
 
     let accountUpvotes = (account && account.upvotes) || [];
 
