@@ -14,6 +14,7 @@ import authservice from "./services/authservice";
 import AboutUs from "./components/aboutus";
 import { Helmet } from "react-helmet";
 import Blogs from "./components/blogs";
+import AdminUsers from "./admin/adminusers";
 
 class App extends Component {
   state = {};
@@ -64,6 +65,10 @@ class App extends Component {
             <Route
               path="/admin/res"
               render={props => <AdminResources {...props} tags={tags} />}
+            />
+            <Route
+              path="/admin/users"
+              render={props => <AdminUsers {...props} tags={tags} />}
             />
             <Route
               path="/"

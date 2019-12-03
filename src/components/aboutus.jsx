@@ -43,30 +43,34 @@ class AboutUs extends Component {
                 <Icon name="chevron circle up"></Icon>
               </div>
             </Segment>
-            <Icon name="quote left" size="large"></Icon>
 
-            <span style={{ fontSize: "34px", fontFamily: "Raleway" }}>
-              The best investment you can make is in yourself{" "}
-            </span>
-            <Icon name="quote right" size="large"></Icon>
-            <p
-              style={{
-                fontSize: "24px",
-                fontFamily: "Raleway",
-                textAlign: "right"
-              }}
-            >
-              - Warren Buffet
-            </p>
-            <Divider hidden></Divider>
-
-            <Divider hidden></Divider>
-            <Image src={aboutus} size="huge" circular centered></Image>
+            {/*    */}
             <Header as="h1" textAlign="">
               <span style={{ fontSize: "35px", fontFamily: "Raleway" }}>
                 Preface
               </span>
             </Header>
+            <Icon name="quote left" size="small"></Icon>
+            <span
+              style={{
+                fontSize: "25px",
+                lineHeight: "30px",
+                fontFamily: "Raleway"
+              }}
+            >
+              The best investment you can make is in yourself{" "}
+            </span>
+            <Icon name="quote right" size="small"></Icon>
+            <p
+              style={{
+                fontSize: "18px",
+                fontFamily: "Raleway",
+                lineHeight: "30px",
+                textAlign: "right"
+              }}
+            >
+              - Warren Buffet
+            </p>
 
             <p
               style={{
