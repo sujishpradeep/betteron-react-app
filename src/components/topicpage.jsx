@@ -8,11 +8,9 @@ import ResourceItem from "./resourceitem";
 import {
   Header,
   Container,
-  Checkbox,
   Grid,
   Menu,
   Icon,
-  Button,
   Loader,
   Dimmer,
   Segment,
@@ -227,12 +225,10 @@ class TopicPage extends Component {
     const {
       account,
       isMobile,
-      activeItem,
 
       isLoading,
       topicname,
 
-      filterPricing,
       submitModal,
       loginModal,
       signupModal,

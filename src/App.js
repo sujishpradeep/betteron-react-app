@@ -15,6 +15,7 @@ import AboutUs from "./components/aboutus";
 import { Helmet } from "react-helmet";
 import Blogs from "./components/blogs";
 import AdminUsers from "./admin/adminusers";
+import BlogsPage from "./components/blogs-page";
 
 class App extends Component {
   state = {};
@@ -49,7 +50,14 @@ class App extends Component {
             />
 
             <Route
+              exact
+              path="/blogs/resolution-for-the-new-decade"
+              render={props => <BlogsPage {...props} tags={tags} />}
+            />
+
+            <Route
               path="/blogs"
+              exact
               render={props => <Blogs {...props} tags={tags} />}
             />
 

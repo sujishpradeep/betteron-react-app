@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import aboutus from "../images//aboutus.png";
 import ContactUs from "./contactus";
 import {
-  Image,
   Icon,
   Segment,
   Container,
@@ -50,8 +48,8 @@ class AboutUs extends Component {
                 Preface
               </span>
             </Header>
-            <Icon name="quote left" size="small"></Icon>
-            <span
+            {/* <Icon name="quote left" size="small"></Icon> */}
+            {/* <span
               style={{
                 fontSize: "25px",
                 lineHeight: "30px",
@@ -70,7 +68,7 @@ class AboutUs extends Component {
               }}
             >
               - Warren Buffet
-            </p>
+            </p> */}
 
             <p
               style={{
