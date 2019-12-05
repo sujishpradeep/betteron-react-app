@@ -31,7 +31,7 @@ class BlogsPage extends Component {
                 Resolution for the new decade
               </span>
               <br></br>
-              <Header.Subheader>December 7th, 2019 </Header.Subheader>
+              <Header.Subheader>December 5th, 2019 </Header.Subheader>
             </Header>
             <Divider hidden></Divider>
             {/* <Image
