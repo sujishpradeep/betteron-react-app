@@ -27,7 +27,7 @@ class BlogsPage extends Component {
             <Header as="h1" textAlign="">
               <span
                 style={{
-                  fontSize: "35px",
+                  fontSize: "1.3em",
                   fontFamily: "Raleway",
                   lineHeight: "50px"
                 }}
@@ -48,7 +48,7 @@ class BlogsPage extends Component {
 
             <p
               style={{
-                fontSize: "18px",
+                fontSize: "1.1em",
                 lineHeight: "30px",
                 fontFamily: "Raleway"
               }}
@@ -72,7 +72,7 @@ class BlogsPage extends Component {
 
             <p
               style={{
-                fontSize: "18px",
+                fontSize: "1.1em",
                 lineHeight: "30px",
                 fontFamily: "Raleway"
               }}
@@ -89,7 +89,7 @@ class BlogsPage extends Component {
             </p>
             <p
               style={{
-                fontSize: "18px",
+                fontSize: "1.1em",
                 lineHeight: "30px",
                 fontFamily: "Raleway"
               }}
@@ -122,7 +122,7 @@ class BlogsPage extends Component {
 
             <p
               style={{
-                fontSize: "18px",
+                fontSize: "1.1em",
                 lineHeight: "30px",
                 fontFamily: "Raleway"
               }}
@@ -153,7 +153,7 @@ class BlogsPage extends Component {
             </p>
             <p
               style={{
-                fontSize: "18px",
+                fontSize: "1.1em",
                 lineHeight: "30px",
                 fontFamily: "Raleway"
               }}
@@ -181,7 +181,7 @@ class BlogsPage extends Component {
             </p>
             <p
               style={{
-                fontSize: "18px",
+                fontSize: "1.1em",
                 lineHeight: "30px",
                 fontFamily: "Raleway"
               }}
@@ -203,7 +203,7 @@ class BlogsPage extends Component {
 
             <p
               style={{
-                fontSize: "18px",
+                fontSize: "1.1em",
                 lineHeight: "30px",
                 fontFamily: "Raleway"
               }}
@@ -214,7 +214,7 @@ class BlogsPage extends Component {
             <Divider></Divider>
             <p
               style={{
-                fontSize: "18px",
+                fontSize: "1.1em",
                 lineHeight: "30px",
                 fontFamily: "Raleway"
               }}
