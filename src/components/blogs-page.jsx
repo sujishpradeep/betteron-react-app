@@ -9,7 +9,11 @@ class BlogsPage extends Component {
     window.scrollTo(0, 0);
   }
 
-  handleClick = () => {
+  handleClickTwitter = () => {
+    this.props.history.push(`/blogs/resolution-for-the-new-decade`);
+  };
+
+  handleClickFacebook = () => {
     this.props.history.push(`/blogs/resolution-for-the-new-decade`);
   };
 
@@ -226,6 +230,7 @@ class BlogsPage extends Component {
                 color="twitter"
                 icon="twitter"
                 size="big"
+                onClick={this.handleClickFacebook}
               />{" "}
               <Button
                 inline
@@ -233,6 +238,7 @@ class BlogsPage extends Component {
                 color="facebook"
                 icon="facebook"
                 size="big"
+                onClick={this.handleClickTwitter}
               />
             </p>
           </Container>
