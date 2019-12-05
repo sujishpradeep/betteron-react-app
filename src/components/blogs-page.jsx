@@ -10,11 +10,11 @@ class BlogsPage extends Component {
   }
 
   handleClickTwitter = () => {
-    this.props.history.push(`/blogs/resolution-for-the-new-decade`);
+    window.open("https://twitter.com/betteron_", "_blank");
   };
 
   handleClickFacebook = () => {
-    this.props.history.push(`/blogs/resolution-for-the-new-decade`);
+    window.open("https://twitter.com/betteron_", "_blank");
   };
 
   render() {
@@ -222,8 +222,8 @@ class BlogsPage extends Component {
               This article is published by Betteron Blogs. We are just getting
               started and we need your support in growing this space. If you
               liked the article, and would like to listen to us more - please
-              click the link and connect with us on twitter or facebook. Thank
-              you. <br></br>
+              click the link and connect with us on twitter. Thank you.{" "}
+              <br></br>
               <Button
                 inline
                 circular
@@ -232,14 +232,14 @@ class BlogsPage extends Component {
                 size="big"
                 onClick={this.handleClickFacebook}
               />{" "}
-              <Button
+              {/* <Button
                 inline
                 circular
                 color="facebook"
                 icon="facebook"
                 size="big"
                 onClick={this.handleClickTwitter}
-              />
+              />*/}
             </p>
           </Container>
         </div>
