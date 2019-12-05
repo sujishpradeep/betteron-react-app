@@ -222,8 +222,7 @@ class BlogsPage extends Component {
               This article is published by Betteron Blogs. We are just getting
               started and we need your support in growing this space. If you
               liked the article, and would like to listen to us more - please
-              click the link and connect with us on twitter. Thank you.{" "}
-              <br></br>
+              click the link and follow us on twitter. <br></br>
               <Button
                 inline
                 circular
