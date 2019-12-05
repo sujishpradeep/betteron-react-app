@@ -162,14 +162,18 @@ class BlogsPage extends Component {
               not? And that's where the 2nd point in the checklist comes in.
               Your instinct(Inner self) would be the savior! If you have planned
               on your vision, executed the small incremental actions on your
-              vision, your instincts will know that you are moving in the right
-              direction. If you can convince yourself that you are moving in the
-              right direction, well then success would just follow! If your
-              long-term vision is to live a healthy lifestyle - Maybe you can
-              achieve it before you have got that "Shed all your calories". You
-              shall start eating healthier, start sleeping more and exercise
-              regularly because as per your vision, your focus is not just on
-              shedding calories and flat abs, but on living a healthy lifestyle.
+              vision,{" "}
+              <b>
+                your instincts will know that you are moving in the right
+                direction
+              </b>
+              . If you can convince yourself that you are moving in the right
+              direction, well then success would just follow! If your long-term
+              vision is to live a healthy lifestyle - Maybe you can achieve it
+              before you have got that "Shed all your calories". You shall start
+              eating healthier, start sleeping more and exercise regularly
+              because as per your vision, your focus is not just on shedding
+              calories and flat abs, but on living a healthy lifestyle.
             </p>
             <p
               style={{
