@@ -12,6 +12,7 @@ import {
 } from "semantic-ui-react";
 import { addResources } from "../services/resourceservice";
 import SearchTag from "./searchtags";
+import authservice from "../services/authservice";
 
 const Joi = require("joi");
 
@@ -26,6 +27,7 @@ class SubmitResource extends Component {
       ioslink: "default",
       gplaylink: "default",
       upvotes: "0",
+      accountid: "0",
       isApproved: "N",
       tags: "  "
     },
@@ -56,6 +58,8 @@ class SubmitResource extends Component {
     try {
       const { addresource } = this.state;
       addresource.tags = this.state.tags.toString();
+      addresource.accountid =
+        authservice.getCurrentUser() && authservice.getCurrentUser().accountid;
 
       await addResources(addresource);
 
@@ -73,6 +77,7 @@ class SubmitResource extends Component {
           gplaylink: "default",
           upvotes: "0",
           isApproved: "N",
+          accountid: "0",
           tags: "  "
         };
         this.setState({ isLoading: false, addresource, tags: [] });
@@ -170,7 +175,8 @@ class SubmitResource extends Component {
     ioslink: Joi.string().optional(),
     gplaylink: Joi.string().optional(),
     isApproved: Joi.string().optional(),
-    upvotes: Joi.string().optional()
+    upvotes: Joi.string().optional(),
+    accountid: Joi.string().optional()
   });
 
   handleRadioChange = (event, { name, value }) => {
@@ -349,10 +355,8 @@ class SubmitResource extends Component {
                   </Form.Field>
                 </Form.Group>
 
-                <Form.Group>
-                  {/* <span size="large" style={{ paddingRight: "187px" }}>
-                    Pricing
-                  </span> */}
+                {/* <Form.Group>
+          
 
                   <Form.Field inline>
                     <label> Pricing</label>
@@ -374,7 +378,7 @@ class SubmitResource extends Component {
                       onChange={this.handleRadioChange}
                     />
                   </Form.Field>
-                </Form.Group>
+                </Form.Group> */}
                 <br></br>
 
                 <Button

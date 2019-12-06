@@ -256,21 +256,21 @@ class TopicPage extends Component {
             content={`Want to find Apps, Books and Videos that would help you with ${topicname}? Check out these resources maintainted by Betteron community. Pick one based on your preference and learn and practice the tips and tricks to help you on ${topicname}.`}
           />
 
-          {/* <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:card" content="summary_large_image" />
           <meta
             name="twitter:title"
-            content={`Find the best Apps and Books on the topic of ${topicname} that everyone loves`}
+            content={`Most favourite Apps and Books to help you with ${topicname}`}
           />
           <meta
             name="twitter:description"
-            content={`Want to find Apps, Books and Videos that would help you with ${topicname}? Check out these resources.`}
+            content={`Want to find Apps, Books and Videos that on the topic of ${topicname} that everone loves? Check out these resources.`}
           />
           <meta name="twitter:site" content="@betteron_" />
           <meta
             name="twitter:image"
             content="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
           />
-          <meta name="twitter:creator" content="@betteron_" /> */}
+          <meta name="twitter:creator" content="@betteron_" />
         </Helmet>
         <NavBar tags={this.props.tags} history={this.props.history}></NavBar>
         <Modal
@@ -448,9 +448,10 @@ class TopicPage extends Component {
                 {!isLoading && _.isEmpty(resourcesFiltered) && (
                   <Message info size="tiny" compact>
                     <p>
-                      This topic does not have any resources yet. If there are
-                      any relevant resources in this topic that you would like
-                      to share with others, please feel free to
+                      This topic/selection does not have any Apps and Books
+                      listed yet. If there are any relevant resources in this
+                      topic that you would like to get listed, please feel free
+                      to
                       <span
                         onClick={() =>
                           fullname
@@ -475,6 +476,25 @@ class TopicPage extends Component {
                     topicname={topicname}
                   />
                 ))}
+
+                {!isLoading && !_.isEmpty(resourcesFiltered) && (
+                  <Message info size="tiny" compact>
+                    <p>
+                      Is your favourite Apps or Books missing from the list? Let
+                      the world know, get them listed by
+                      <span
+                        onClick={() =>
+                          fullname
+                            ? this.setState({ submitModal: true })
+                            : this.setState({ signupModal: true })
+                        }
+                        className="pointer underline noSelect"
+                      >
+                        submiting a resource.
+                      </span>
+                    </p>
+                  </Message>
+                )}
               </Grid.Column>
             </Grid>
           </Container>

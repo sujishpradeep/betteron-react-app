@@ -22,7 +22,7 @@ class Blogs extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar tag={this.props.tags} history={this.props.history}></NavBar>
+        <NavBar tags={this.props.tags} history={this.props.history}></NavBar>
         <div className="outer-container">
           <Container text style={{ marginTop: "2em", paddingBottom: "7em" }}>
             <Header
