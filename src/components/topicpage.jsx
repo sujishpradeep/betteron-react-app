@@ -256,7 +256,7 @@ class TopicPage extends Component {
             content={`Want to find Apps, Books and Videos that would help you with ${topicname}? Check out these resources maintainted by Betteron community. Pick one based on your preference and learn and practice the tips and tricks to help you on ${topicname}.`}
           />
 
-          <meta name="twitter:card" content="summary_large_image" />
+          {/* <meta name="twitter:card" content="summary_large_image" />
           <meta
             name="twitter:title"
             content={`Find the best Apps and Books on the topic of ${topicname} that everyone loves`}
@@ -270,7 +270,7 @@ class TopicPage extends Component {
             name="twitter:image"
             content="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
           />
-          <meta name="twitter:creator" content="@betteron_" />
+          <meta name="twitter:creator" content="@betteron_" /> */}
         </Helmet>
         <NavBar tags={this.props.tags} history={this.props.history}></NavBar>
         <Modal
