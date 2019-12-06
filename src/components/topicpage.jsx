@@ -225,16 +225,16 @@ class TopicPage extends Component {
     const {
       account,
       isMobile,
-
       isLoading,
       topicname,
-
       submitModal,
       loginModal,
       signupModal,
       closeIcon
     } = this.state;
     let filterType = this.state.filterType || "Books";
+
+    const fullname = (account && account.fullname) || "";
 
     let accountUpvotes = (account && account.upvotes) || [];
 
@@ -436,7 +436,11 @@ class TopicPage extends Component {
                       any relevant resources in this topic that you would like
                       to share with others, please feel free to
                       <span
-                        onClick={() => this.setState({ submitModal: true })}
+                        onClick={() =>
+                          fullname
+                            ? this.setState({ submitModal: true })
+                            : this.setState({ signupModal: true })
+                        }
                         className="pointer underline noSelect"
                       >
                         submit a resource.
