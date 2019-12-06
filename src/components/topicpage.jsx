@@ -249,12 +249,28 @@ class TopicPage extends Component {
       <React.Fragment>
         <Helmet>
           <title>
-            {`${topicname} - Find the Best Apps, Books and Videos on ${topicname}, submitted and upvoted by Betteron community!`}
+            {`${topicname} - Find the Best Apps and Books on ${topicname}, submitted and upvoted by Betteron community!`}
           </title>
           <meta
             name="description"
             content={`Want to find Apps, Books and Videos that would help you with ${topicname}? Check out these resources maintainted by Betteron community. Pick one based on your preference and learn and practice the tips and tricks to help you on ${topicname}.`}
           />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content={`Find the best Apps and Books on the topic of ${topicname} that everyone loves`}
+          />
+          <meta
+            name="twitter:description"
+            content={`Want to find Apps, Books and Videos that would help you with ${topicname}? Check out these resources.`}
+          />
+          <meta name="twitter:site" content="@betteron_" />
+          <meta
+            name="twitter:image"
+            content="https://unsplash.com/photos/fMD_Cru6OTk"
+          />
+          <meta name="twitter:creator" content="@betteron_" />
         </Helmet>
         <NavBar tags={this.props.tags} history={this.props.history}></NavBar>
         <Modal
