@@ -268,7 +268,7 @@ class TopicPage extends Component {
           <meta name="twitter:site" content="@betteron_" />
           <meta
             name="twitter:image"
-            content="https://unsplash.com/photos/fMD_Cru6OTk"
+            content="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
           />
           <meta name="twitter:creator" content="@betteron_" />
         </Helmet>
