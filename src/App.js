@@ -32,6 +32,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <Helmet>
+          <meta charSet="utf-8" />
           <title>
             {`Find the Best Apps, Books and Videos on Personal Development, Croudsourced at Betteron`}
           </title>
