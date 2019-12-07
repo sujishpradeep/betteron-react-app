@@ -26,7 +26,7 @@ import update from "immutability-helper";
 import SubmitResource from "./submitres";
 import Signup from "./signup";
 import Login from "./login";
-import { Helmet } from "react-helmet";
+import { Helmet, Child } from "react-helmet";
 
 class TopicPage extends Component {
   state = {
@@ -247,31 +247,33 @@ class TopicPage extends Component {
 
     return (
       <React.Fragment>
-        <Helmet>
-          <title>
-            {`${topicname} - Find the Best Apps and Books on ${topicname}, submitted and upvoted by Betteron community!`}
-          </title>
-          <meta
-            name="description"
-            content={`Want to find Apps, Books and Videos that would help you with ${topicname}? Check out these resources maintainted by Betteron community. Pick one based on your preference and learn and practice the tips and tricks to help you on ${topicname}.`}
-          />
+        <Child>
+          <Helmet>
+            <title>
+              {`${topicname} - Find the Best Apps and Books on ${topicname}, submitted and upvoted by Betteron community!`}
+            </title>
+            <meta
+              name="description"
+              content={`Want to find Apps, Books and Videos that would help you with ${topicname}? Check out these resources maintainted by Betteron community. Pick one based on your preference and learn and practice the tips and tricks to help you on ${topicname}.`}
+            />
 
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta
-            name="twitter:title"
-            content={`Best Apps and Books to help you with ${topicname}`}
-          />
-          <meta
-            name="twitter:description"
-            content={`Want to find Apps, Books and Videos that on the topic of ${topicname} that everyone loves? Check out these resources.`}
-          />
-          <meta name="twitter:site" content="@betteron_" />
-          <meta
-            name="twitter:image"
-            content="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
-          />
-          <meta name="twitter:creator" content="@betteron_" />
-        </Helmet>
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta
+              name="twitter:title"
+              content={`Best Apps and Books to help you with ${topicname}`}
+            />
+            <meta
+              name="twitter:description"
+              content={`Want to find Apps, Books and Videos that on the topic of ${topicname} that everyone loves? Check out these resources.`}
+            />
+            <meta name="twitter:site" content="@betteron_" />
+            <meta
+              name="twitter:image"
+              content="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
+            />
+            <meta name="twitter:creator" content="@betteron_" />
+          </Helmet>
+        </Child>
         <NavBar tags={this.props.tags} history={this.props.history}></NavBar>
         <Modal
           size="tiny"
