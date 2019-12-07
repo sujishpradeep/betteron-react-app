@@ -40,6 +40,21 @@ class App extends Component {
             name="description"
             content={`Want to find Apps, Books and Videos that would help you with Personal Development? Check out these resources maintainted by Betteron community. Pick one based on your preference and learn and practice the tips and tricks to help you on Personal Development.`}
           />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="Find the Best Apps and Books on Personal Development"
+          />
+          <meta
+            name="twitter:description"
+            content="Want to find Apps and Books that would help you with Personal Development? Check out these resources."
+          />
+          <meta name="twitter:site" content="@betteron_" />
+          <meta
+            name="twitter:image"
+            content="https://blogs-betteron.s3-ap-southeast-2.amazonaws.com/betteron_logo.png"
+          />
+          <meta name="twitter:creator" content="@betteron_" />
         </Helmet>
         <Router>
           <Switch>

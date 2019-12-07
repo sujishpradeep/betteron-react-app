@@ -259,11 +259,11 @@ class TopicPage extends Component {
           <meta name="twitter:card" content="summary_large_image" />
           <meta
             name="twitter:title"
-            content={`Most favourite Apps and Books to help you with ${topicname}`}
+            content={`Best Apps and Books to help you with ${topicname}`}
           />
           <meta
             name="twitter:description"
-            content={`Want to find Apps, Books and Videos that on the topic of ${topicname} that everone loves? Check out these resources.`}
+            content={`Want to find Apps, Books and Videos that on the topic of ${topicname} that everyone loves? Check out these resources.`}
           />
           <meta name="twitter:site" content="@betteron_" />
           <meta

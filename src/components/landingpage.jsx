@@ -77,7 +77,7 @@ class LandingPage extends Component {
             <div className=" main-big-font centre-font inline pointer noSelect">
               betteron
               {/* <i className="fas fa-chevron-circle-up "></i> */}
-              <Icon name="chevron circle up"></Icon>
+              <Icon name="chevron circle up" size="massive"></Icon>
             </div>
             {/* <div
               style={{ color: "#999", fontSize: "15px", textAlign: "center" }}
