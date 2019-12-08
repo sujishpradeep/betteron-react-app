@@ -100,10 +100,10 @@ class AboutUs extends Component {
               by following the Learn, Plan and Practice method. Although there
               are plenty of tools out there - Apps, Books, Videos and many more
               resources which help you do that, we feel that the knowledge is
-              scattered on the web making it difficult for one to find the
-              resources that really matters. So at Betteron, we aim to organize
-              these available tools and categorize them based on user
-              preferences to make it easy for you to find what you need. We
+              scattered in the web making it difficult for one to find the
+              resources that really matters. So the first thing we aim to do is
+              to organize these available tools and categorize them based on
+              user preferences to make it easy for you to find what you need. We
               would also be writing on quick tips, product reviews and relevant
               news in the personal development space that adds value to you in
               your journey to get better.

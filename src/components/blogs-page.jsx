@@ -219,10 +219,9 @@ class BlogsPage extends Component {
                 fontFamily: "Raleway"
               }}
             >
-              This article is published by Betteron Blogs. We are just getting
-              started and we need your support in growing this space. If you
-              liked the article, and would like to listen to us more - please
-              click the link and follow us on twitter. <br></br>
+              This article is published by Betteron Blogs. If you liked the
+              article, and if you would listen to us more - please click the
+              link and let's get connected on twitter. <br></br>
               <Button
                 inline
                 circular

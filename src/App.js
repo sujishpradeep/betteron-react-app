@@ -34,11 +34,11 @@ class App extends Component {
         <Helmet>
           <meta charSet="utf-8" />
           <title>
-            {`Find the Best Apps, Books and Videos on Personal Development, Croudsourced at Betteron`}
+            {`Find the Best Apps Resources on Personal Development, Croudsourced at Betteron`}
           </title>
           <meta
             name="description"
-            content={`Want to find Apps, Books and Videos that would help you with Personal Development? Check out these resources maintainted by Betteron community. Pick one based on your preference and learn and practice the tips and tricks to help you on Personal Development.`}
+            content={`Want to find Apps and Books that would help you with Personal Development? Check out these resources maintainted by Betteron community. Pick one based on your preference and learn and practice the tips and tricks to help you on Personal Development.`}
           />
           <meta name="twitter:card" content="summary_large_image" />
           <meta
