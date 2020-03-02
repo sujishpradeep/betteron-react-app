@@ -26,9 +26,9 @@ class Footer extends Component {
           <Link to="/blogs">
             <span className="footer-menu noSelect">Blogs</span>
           </Link>
-          <Link to="/aboutus">
+          {/* <Link to="/aboutus">
             <span className="footer-menu noSelect">About us</span>
-          </Link>
+          </Link> */}
           <span
             className="footer-menu noSelect"
             onClick={() =>
@@ -41,7 +41,7 @@ class Footer extends Component {
           >
             Feedback
           </span>
-          <span
+          {/* <span
             className="footer-menu noSelect"
             onClick={() =>
               this.setState({
@@ -52,7 +52,7 @@ class Footer extends Component {
             }
           >
             Contact us
-          </span>
+          </span> */}
         </Segment>
       </React.Fragment>
     );

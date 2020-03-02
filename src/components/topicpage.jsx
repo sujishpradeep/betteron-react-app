@@ -480,8 +480,8 @@ class TopicPage extends Component {
                 {!isLoading && !_.isEmpty(resourcesFiltered) && (
                   <Message info size="tiny" compact>
                     <p>
-                      Is your favourite Apps or Books missing from the list? Let
-                      the world know, get them listed by
+                      Is your favourite Apps or Books missing from the list? You
+                      can get them listed by
                       <span
                         onClick={() =>
                           fullname

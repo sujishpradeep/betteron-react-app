@@ -90,10 +90,10 @@ class App extends Component {
               render={props => <Blogs {...props} tags={tags} />}
             />
 
-            <Route
+            {/* <Route
               path="/aboutus"
               render={props => <AboutUs {...props} tags={tags} />}
-            />
+            /> */}
 
             <Route
               path="/admin/tags"
