@@ -11,7 +11,6 @@ import TopicPage from "./components/topicpage";
 import AdminTags from "./admin/admintags";
 import AdminResources from "./admin/adminresources";
 import authservice from "./services/authservice";
-import AboutUs from "./components/aboutus";
 import { Helmet } from "react-helmet";
 import Blogs from "./components/blogs";
 import AdminUsers from "./admin/adminusers";
