@@ -1,5 +1,5 @@
 const dev = {
-  API_URL: "https://www.myunspent.com"
+  API_URL: "https://api.betteron.co"
 };
 
 const prod = {
