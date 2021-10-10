@@ -11,13 +11,13 @@ class ContactUs extends Component {
       name: "",
       email: "",
       message: "",
-      type: "default"
+      type: "default",
     },
     errors: {},
     values: [],
     isSearchLoadings: [],
     isLoading: false,
-    successMessage: false
+    successMessage: false,
   };
 
   componentDidMount = () => {
@@ -50,7 +50,7 @@ class ContactUs extends Component {
           name: "",
           email: "",
           message: "",
-          type: "default"
+          type: "default",
         };
         this.setState({ isLoading: false, contactus, tags: [] });
       }, 1000);
@@ -77,8 +77,8 @@ class ContactUs extends Component {
         contactus,
         errors: {
           ...this.state.errors,
-          name: ""
-        }
+          name: "",
+        },
       });
     }
   };
@@ -88,16 +88,16 @@ class ContactUs extends Component {
       .optional()
       .error(() => {
         return {
-          message: `Name is empty`
+          message: `Name is empty`,
         };
       }),
 
     email: Joi.string()
       .optional()
       .email()
-      .error(err => {
+      .error((err) => {
         return {
-          message: "Email is invalid"
+          message: "Email is invalid",
         };
       }),
 
@@ -105,7 +105,7 @@ class ContactUs extends Component {
       .required()
       .error(() => {
         return {
-          message: `Message is empty`
+          message: `Message is empty`,
         };
       }),
 
@@ -113,9 +113,9 @@ class ContactUs extends Component {
       .optional()
       .error(() => {
         return {
-          message: `Invalid type`
+          message: `Invalid type`,
         };
-      })
+      }),
   });
 
   render() {
@@ -126,7 +126,7 @@ class ContactUs extends Component {
     const subtext =
       this.props.messagetype === "message"
         ? "Please feel free to ask us if you have any questions"
-        : "We would love to hear from you";
+        : "This is a personal / hobby project. ";
 
     return (
       <React.Fragment>
@@ -140,7 +140,7 @@ class ContactUs extends Component {
               fontSize: "14px",
               color: "#999",
               marginTop: "1px",
-              fontWeight: "300"
+              fontWeight: "300",
             }}
           >
             {subtext}
@@ -207,7 +207,7 @@ class ContactUs extends Component {
               <Button
                 type="submit"
                 color="blue"
-                onClick={event => {
+                onClick={(event) => {
                   this.handleSubmit();
                 }}
                 fluid

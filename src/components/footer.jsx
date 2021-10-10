@@ -23,9 +23,6 @@ class Footer extends Component {
           ></ContactUs>
         </Modal>
         <Segment basic textAlign="center">
-          <Link to="/blogs">
-            <span className="footer-menu noSelect">Blogs</span>
-          </Link>
           {/* <Link to="/aboutus">
             <span className="footer-menu noSelect">About us</span>
           </Link> */}
@@ -34,8 +31,8 @@ class Footer extends Component {
             onClick={() =>
               this.setState({
                 submitModal: true,
-                formtype: "Send us a feedback",
-                messagetype: "feedback"
+                formtype: "Please send your feedback",
+                messagetype: "feedback",
               })
             }
           >

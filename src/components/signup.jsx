@@ -5,7 +5,7 @@ import {
   Message,
   Modal,
   Button,
-  Header
+  Header,
 } from "semantic-ui-react";
 
 import GoogleLogin from "react-google-login";
@@ -18,10 +18,10 @@ class Signup extends Component {
   state = {
     user: { fullname: "", email: "", password: "" },
     errors: {},
-    redirectUser: false
+    redirectUser: false,
   };
 
-  responseGoogle = async response => {
+  responseGoogle = async (response) => {
     const token = JSON.stringify(response.tokenObj.id_token);
     localStorage.setItem("gtoken", token);
     this.setState({ redirectUser: true });
@@ -83,22 +83,22 @@ class Signup extends Component {
       .required()
       .error(() => {
         return {
-          message: `Name can't be blank`
+          message: `Name can't be blank`,
         };
       }),
     email: Joi.string()
       .email()
       .required()
-      .error(err => {
+      .error((err) => {
         return {
-          message: "Invalid email"
+          message: "Invalid email",
         };
       }),
     password: Joi.string()
       .min(6)
       .required()
-      .error(errors => {
-        errors.forEach(err => {
+      .error((errors) => {
+        errors.forEach((err) => {
           switch (err.type) {
             case "any.empty":
               err.message = "Password can't be blank";
@@ -113,7 +113,7 @@ class Signup extends Component {
         return errors;
       }),
 
-    loginmethod: Joi.string().optional()
+    loginmethod: Joi.string().optional(),
   });
 
   validateUser = () => {
@@ -135,31 +135,19 @@ class Signup extends Component {
                 style={{
                   fontSize: "14px",
                   color: "#999",
-                  letterSpacing: "0.6px"
+                  letterSpacing: "0.6px",
                 }}
               >
                 Sign up to submit resources, upvote resources and more.
               </span>
             </Header.Subheader>
           </Header>
-          <div
-            style={{
-              textAlign: "center",
-              fontSize: "14px",
-              color: "#999",
-              letterSpacing: "1px",
-              marginTop: "10px",
-              fontWeight: "300"
-            }}
-          >
-            CONTINUE WITH
-          </div>
         </Modal.Header>
         <Modal.Content>
           <div style={{ textAlign: "center" }}>
             <GoogleLogin
               clientId="815040356813-cu6jblg136af2tfbju6amps6eip5g1gh.apps.googleusercontent.com"
-              render={renderProps => (
+              render={(renderProps) => (
                 <button
                   class="loginBtn loginBtn--google"
                   onClick={renderProps.onClick}
@@ -214,14 +202,14 @@ class Signup extends Component {
                 <Button
                   type="submit"
                   color="blue"
-                  onClick={event => {
+                  onClick={(event) => {
                     this.handleSubmit();
                   }}
                   fluid
                 >
                   <span
                     style={{
-                      letterSpacing: "0.6px"
+                      letterSpacing: "0.6px",
                     }}
                   >
                     Create Account
@@ -234,7 +222,7 @@ class Signup extends Component {
                 fontSize: "12px",
                 color: "#999",
                 letterSpacing: "0.6px",
-                paddingTop: "10px"
+                paddingTop: "10px",
               }}
             >
               Already have an account?
@@ -243,7 +231,7 @@ class Signup extends Component {
                 style={{
                   color: "#007aff",
                   fontSize: "14px",
-                  paddingLeft: "5px"
+                  paddingLeft: "5px",
                 }}
                 onClick={this.props.onLoginModalClick}
               >

@@ -9,15 +9,15 @@ import {
   Modal,
   Form,
   Radio,
-  Input
+  Input,
 } from "semantic-ui-react";
 
 class AdminTags extends Component {
   state = {
     addtag: {
       name: "",
-      popular: ""
-    }
+      popular: "",
+    },
   };
 
   async componentDidMount() {
@@ -29,7 +29,7 @@ class AdminTags extends Component {
     this.setState({ tags: data });
   };
 
-  handleDelete = async short => {
+  handleDelete = async (short) => {
     await deleteTags(short);
     this.refreshPage();
   };
@@ -58,7 +58,7 @@ class AdminTags extends Component {
     addtag.name = "";
     this.setState({
       addtag,
-      showModal: true
+      showModal: true,
     });
   };
 
@@ -130,7 +130,7 @@ class AdminTags extends Component {
               <Form.Group>
                 <Button
                   color="green"
-                  onClick={event => {
+                  onClick={(event) => {
                     this.handleSubmit();
                   }}
                 >
@@ -157,7 +157,7 @@ class AdminTags extends Component {
 
           <Table.Body>
             {tags &&
-              tags.map(t => (
+              tags.map((t) => (
                 <Table.Row key={t.short}>
                   <Table.Cell>{t.name}</Table.Cell>
                   <Table.Cell>{t.short}</Table.Cell>

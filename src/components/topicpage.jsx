@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NavBar from "./navbar";
 import {
   getResourcesByTag,
-  updateResourceUpvotes
+  updateResourceUpvotes,
 } from "../services/resourceservice";
 import ResourceItem from "./resourceitem";
 import {
@@ -16,7 +16,7 @@ import {
   Segment,
   Divider,
   Message,
-  Modal
+  Modal,
 } from "semantic-ui-react";
 import _ from "lodash";
 import { addOrRemoveFromArray } from "../generic/arrays";
@@ -35,7 +35,7 @@ class TopicPage extends Component {
     filterPricing: "",
     loginModal: false,
     signupModal: false,
-    submitModal: false
+    submitModal: false,
   };
 
   constructor(props) {
@@ -46,7 +46,7 @@ class TopicPage extends Component {
 
   async componentDidMount() {
     const topicname = this.props.match.params.topicname
-      .replace(/\b\w/g, l => l.toUpperCase())
+      .replace(/\b\w/g, (l) => l.toUpperCase())
       .replace("-", " ");
 
     this.updateWindowDimensions();
@@ -57,7 +57,7 @@ class TopicPage extends Component {
       isLoading: true,
       topicname,
       filterType: "Books",
-      filterPricing: ""
+      filterPricing: "",
     });
     setTimeout(() => {
       this.setResources(this.props.match.params.topicname);
@@ -77,7 +77,7 @@ class TopicPage extends Component {
     const { data } = await getResourcesByTag(topicname);
 
     topicname = topicname
-      .replace(/\b\w/g, l => l.toUpperCase())
+      .replace(/\b\w/g, (l) => l.toUpperCase())
       .replace("-", " ");
 
     this.setState({ isLoading: false });
@@ -89,13 +89,13 @@ class TopicPage extends Component {
       this.props.match.params.topicname !== prevProps.match.params.topicname
     ) {
       const topicname = this.props.match.params.topicname
-        .replace(/\b\w/g, l => l.toUpperCase())
+        .replace(/\b\w/g, (l) => l.toUpperCase())
         .replace("-", " ");
       this.setState({
         isLoading: true,
         topicname,
         resources: [],
-        filterPricing: ""
+        filterPricing: "",
       });
       setTimeout(() => {
         this.setResources(this.props.match.params.topicname);
@@ -114,7 +114,7 @@ class TopicPage extends Component {
     this.setState({
       width: window.innerWidth,
       height: window.innerHeight,
-      isMobile: isMobile
+      isMobile: isMobile,
     });
   }
 
@@ -131,23 +131,23 @@ class TopicPage extends Component {
   //   this.setState({ filterVisible });
   // };
 
-  handleLabelClick = topic => {
+  handleLabelClick = (topic) => {
     this.setState({ topicname: topic });
   };
 
   doSortAndFilter = () => {
     const resources = this.state.resources || [];
-    let filtered = resources.filter(r => r.isApproved === "Y");
+    let filtered = resources.filter((r) => r.isApproved === "Y");
     const filterType = this.state.filterType || "Books";
 
     if (filterType.length > 0) {
-      filtered = filtered.filter(r => r.type.concat("s") === filterType);
+      filtered = filtered.filter((r) => r.type.concat("s") === filterType);
     }
 
     const filterPricing = this.state.filterPricing || "";
 
     if (filterPricing.length > 0) {
-      filtered = filtered.filter(r => r.pricing === filterPricing);
+      filtered = filtered.filter((r) => r.pricing === filterPricing);
     }
 
     let resourcesSorted = filtered;
@@ -174,7 +174,7 @@ class TopicPage extends Component {
     }, 500);
   };
 
-  handleUpvoteClick = async resource => {
+  handleUpvoteClick = async (resource) => {
     const { account } = this.state;
     if (!(account && account._id)) {
       this.setState({ signupModal: true });
@@ -188,10 +188,10 @@ class TopicPage extends Component {
     const counter = accountUpvotes.includes(resource._id) ? -1 : 1;
     resource.upvotes += counter;
     const { resources } = this.state;
-    var index = resources.findIndex(r => r._id === resource._id);
+    var index = resources.findIndex((r) => r._id === resource._id);
 
     const updatedResources = update(this.state.resources, {
-      $splice: [[index, 1, resource]]
+      $splice: [[index, 1, resource]],
     }); // array.splice(start, deleteCount, item1)
 
     const upvotes = addOrRemoveFromArray(accountUpvotes, resource._id);
@@ -230,7 +230,7 @@ class TopicPage extends Component {
       submitModal,
       loginModal,
       signupModal,
-      closeIcon
+      closeIcon,
     } = this.state;
     let filterType = this.state.filterType || "Books";
 
@@ -249,11 +249,11 @@ class TopicPage extends Component {
       <React.Fragment>
         <Helmet>
           <title>
-            {`${topicname} - Find the Best Apps and Books on ${topicname}, submitted and upvoted by Betteron community!`}
+            {`${topicname} - Find the Best Apps and Books on ${topicname}, submitted and upvoted by others!`}
           </title>
           <meta
             name="description"
-            content={`Want to find Apps, Books and Videos that would help you with ${topicname}? Check out these resources maintainted by Betteron community. Pick one based on your preference and learn and practice the tips and tricks to help you on ${topicname}.`}
+            content={`Want to find Apps, Books and Videos that would help you with ${topicname}? Check out these resources. Pick one based on your preference and learn and practice the tips and tricks to help you on ${topicname}.`}
           />
 
           <meta name="twitter:card" content="summary_large_image" />
@@ -310,7 +310,7 @@ class TopicPage extends Component {
                     {topicname}
                     <Header.Subheader>
                       {`Find Books and Apps submitted and voted by
-                      betteron Community on the topic of ${topicname}`}
+                      the community on the topic of ${topicname}`}
                     </Header.Subheader>
                   </Header.Content>
                 </Header>
@@ -430,7 +430,7 @@ class TopicPage extends Component {
                     padding: "10px",
                     border: "solid 1px rgba(34,36,38,.15)",
                     background: "rgba(34,36,38,.1)",
-                    fontSize: "15px"
+                    fontSize: "15px",
                   }}
                 >
                   {`Most Upvoted ${filterType} on ${topicname} `}
@@ -465,7 +465,7 @@ class TopicPage extends Component {
                     </p>
                   </Message>
                 )}
-                {resourcesFiltered.map(r => (
+                {resourcesFiltered.map((r) => (
                   <ResourceItem
                     key={r._id}
                     resource={r}

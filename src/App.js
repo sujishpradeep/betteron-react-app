@@ -37,7 +37,7 @@ class App extends Component {
           </title>
           <meta
             name="description"
-            content={`Want to find Apps and Books that would help you with Personal Development? Check out these resources maintainted by Betteron community. Pick one based on your preference and learn and practice the tips and tricks to help you on Personal Development.`}
+            content={`Want to find Apps and Books that would help you with Personal Development? Check out these resources. Pick one based on your preference and learn and practice the tips and tricks to help you on Personal Development.`}
           />
           <meta name="twitter:card" content="summary_large_image" />
           <meta
@@ -60,7 +60,7 @@ class App extends Component {
           />
           <meta
             property="og:description"
-            content={`Want to find Apps, Books and Videos that would help you with Personal Development? Check out these resources maintainted by Betteron community. Pick one based on your preference and learn and practice the tips and tricks to help you on Personal Development.`}
+            content={`Want to find Apps, Books and Videos that would help you with Personal Development? Check out these resources. Pick one based on your preference and learn and practice the tips and tricks to help you on Personal Development.`}
           />
 
           <meta
