@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Segment, Modal } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 import ContactUs from "./contactus";
 
 class Footer extends Component {
